@@ -3,11 +3,6 @@ import java.util.ArrayList;
 
 public class Display {
 
-    public static void main(String[] args) {
-        launch();
-    }
-
-
     private Search search;
     private Filter filter;
     private ArrayList<Task> taskList;
@@ -18,10 +13,12 @@ public class Display {
         this.taskList = new ArrayList<>();
     }
 
+    //updates view of display
     public void updateView(){
         //
     }
 
+    //displays error message on display
     public void displayError(){
         //
     }
