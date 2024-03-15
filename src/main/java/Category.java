@@ -1,16 +1,16 @@
 
 class Category extends Categories {
 
-    private String categoryColor;
+    private String categoryColor = "Orange";
 
-    public void getName() {
 
-    }
+    public String getCategoryColor() {
 
-    public void getCategoryColor() {
+        return categoryColor;
 
     }
     public void renameCategory() {
+        // To be implemented
 
     }
 

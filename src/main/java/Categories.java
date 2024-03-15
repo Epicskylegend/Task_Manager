@@ -1,9 +1,9 @@
 abstract  class  Categories {
 
-    private String name;
+    private String name = "Sports";
 
-    public void getName() {
+    public String getName() {
+        return this.name;
 
     }
-
 }
