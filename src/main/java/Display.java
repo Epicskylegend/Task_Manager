@@ -13,10 +13,12 @@ public class Display {
         this.taskList = new ArrayList<>();
     }
 
+    //updates view of display
     public void updateView(){
         //
     }
 
+    //displays error message on display
     public void displayError(){
         //
     }

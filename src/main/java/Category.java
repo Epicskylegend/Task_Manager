@@ -6,6 +6,10 @@ class Category extends Categories {
 
     public String getCategoryColor() {
 
+    public void getName() {
+      
+    }
+
         return categoryColor;
 
     }
