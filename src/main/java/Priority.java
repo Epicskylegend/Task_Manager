@@ -1,5 +1,3 @@
-package edu.metrostate.service;
-
 interface PriorityInterface {
     int getPriorityLevel();
 }
