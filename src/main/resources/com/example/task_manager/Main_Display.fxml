@@ -24,43 +24,43 @@
     <children>
         <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
             <children>
-                <Button mnemonicParsing="false" text="+New com.example.task_manager.Task" textFill="#3a831d" />
-                <ComboBox prefWidth="150.0" promptText="com.example.task_manager.Filter by com.example.task_manager.Category" />
+                <Button mnemonicParsing="false" text="+New Task" textFill="#3a831d" />
+                <ComboBox prefWidth="150.0" promptText="Filter by Category" />
             </children>
         </VBox>
         <Accordion GridPane.columnIndex="1" GridPane.rowIndex="1">
             <panes>
-                <TitledPane animated="false" text="com.example.task_manager.Priority Level 1">
+                <TitledPane animated="false" text="Priority Level 1 ">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="17.0" prefHeight="17.0" prefWidth="460.0" text="com.example.task_manager.Task #2" textAlignment="CENTER" />
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="com.example.task_manager.Task #1" textAlignment="CENTER" />
+                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="17.0" prefHeight="17.0" prefWidth="460.0" text="Task #2" textAlignment="CENTER" />
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="Task #1" textAlignment="CENTER" />
                             </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
-                <TitledPane animated="false" text="com.example.task_manager.Priority Level 2">
+                <TitledPane animated="false" text="Priority Level 2">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="com.example.task_manager.Task #3" textAlignment="CENTER" />
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="Task #3" textAlignment="CENTER" />
                             </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
-                <TitledPane animated="false" text="com.example.task_manager.Priority Level 3">
+                <TitledPane animated="false" text="Priority Level 3">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="com.example.task_manager.Task #4" textAlignment="CENTER" />
-                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="17.0" prefHeight="17.0" prefWidth="460.0" text="com.example.task_manager.Task #5" textAlignment="CENTER" />
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="Task #4" textAlignment="CENTER" />
+                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="17.0" prefHeight="17.0" prefWidth="460.0" text="Task #5" textAlignment="CENTER" />
                             </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
             </panes>
         </Accordion>
-        <TextField promptText="com.example.task_manager.Search com.example.task_manager.Task" GridPane.columnIndex="1" />
+        <TextField promptText="Search Bar" GridPane.columnIndex="1" />
     </children>
 </GridPane>
