@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.task_manager.HelloController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="41.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.0" minWidth="10.0" prefWidth="460.0" />
@@ -25,7 +24,7 @@
         <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
             <children>
                 <Button mnemonicParsing="false" text="+New Task" textFill="#3a831d" />
-                <ComboBox prefWidth="150.0" promptText="Filter by Category" />
+                <ComboBox fx:id="catComboBox" prefWidth="150.0" promptText="Filter by Category" />
             </children>
         </VBox>
         <Accordion GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -33,29 +32,29 @@
                 <TitledPane animated="false" text="Priority Level 1 ">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="17.0" prefHeight="17.0" prefWidth="460.0" text="Task #2" textAlignment="CENTER" />
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="Task #1" textAlignment="CENTER" />
-                            </children>
+                     <children>
+                        <Button alignment="BOTTOM_LEFT" layoutX="-5.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #1" />
+                        <Button alignment="BOTTOM_LEFT" layoutX="-4.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #2" />
+                     </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
                 <TitledPane animated="false" text="Priority Level 2">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="Task #3" textAlignment="CENTER" />
-                            </children>
+                     <children>
+                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #3" />
+                     </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
                 <TitledPane animated="false" text="Priority Level 3">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="Task #4" textAlignment="CENTER" />
-                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="17.0" prefHeight="17.0" prefWidth="460.0" text="Task #5" textAlignment="CENTER" />
-                            </children>
+                     <children>
+                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #4" />
+                        <Button alignment="BOTTOM_LEFT" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #5" />
+                     </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
