@@ -1,6 +1,5 @@
 # Task Manager Application
 
-
 ## Code Structure:
 ### For our project our java classes are in inside the source directory. From there if you open the main directory you will see a java directory which has all of our java code. All of our java files are within the "com.example.task_manager" package.
 
