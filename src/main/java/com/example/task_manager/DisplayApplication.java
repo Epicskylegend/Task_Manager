@@ -11,8 +11,8 @@ public class DisplayApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(DisplayApplication.class.getResource("Main_Display.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Task Manager Main Screen");
         stage.setScene(scene);
         stage.show();
     }

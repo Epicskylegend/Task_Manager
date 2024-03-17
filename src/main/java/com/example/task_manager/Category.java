@@ -2,7 +2,7 @@ package com.example.task_manager;
 
 import com.example.task_manager.Categories;
 
-class Category extends Categories {
+public class Category extends Categories {
 
     private String categoryColor = "Orange";
 
