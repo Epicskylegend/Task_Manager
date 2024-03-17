@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Task Manager Application
 
 ## Code Structure:
@@ -9,6 +9,4 @@
 ## Running Application:
 
 ### To run this application you need to run the file called "DisplayApplication" inside the com.example.task_manager package.
-=======
-# Task_Manager
->>>>>>> parent of 4492021... Modified README file to properly outline code structure and instructions to run application.
+
