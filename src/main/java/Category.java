@@ -1,6 +1,3 @@
-package com.example.task_manager;
-
-import com.example.task_manager.Categories;
 
 class Category extends Categories {
 

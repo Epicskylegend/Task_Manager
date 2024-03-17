@@ -1,5 +1,3 @@
-package com.example.task_manager;
-
 abstract  class  Categories {
 
     private String name = "Sports";
