@@ -1,4 +1,4 @@
-# Task Manager
+# Task Manager Application
 
 
 ## Code Structure:
