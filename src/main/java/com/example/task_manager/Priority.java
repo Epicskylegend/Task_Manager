@@ -1,3 +1,5 @@
+package com.example.task_manager;
+
 interface PriorityInterface {
     int getPriorityLevel();
 }

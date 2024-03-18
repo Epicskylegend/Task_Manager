@@ -1,3 +1,7 @@
+package com.example.task_manager;
+
+import com.example.task_manager.Category;
+
 import java.util.ArrayList;
 
 public class Filter {

@@ -1,5 +1,8 @@
+package com.example.task_manager;
 
-class Category extends Categories {
+import com.example.task_manager.Categories;
+
+public class Category extends Categories {
 
     private String categoryColor;
 
