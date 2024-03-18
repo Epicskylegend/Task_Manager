@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.task_manager.DisplayController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.0" minWidth="10.0" prefWidth="41.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="460.0" minWidth="10.0" prefWidth="460.0" />
@@ -25,37 +25,42 @@
         <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
             <children>
                 <Button mnemonicParsing="false" text="+New Task" textFill="#3a831d" />
-                <ComboBox prefWidth="150.0" promptText="Filter by Category" />
+                <ComboBox fx:id="catComboBox" prefWidth="150.0" promptText="Filter by Category" />
             </children>
         </VBox>
         <Accordion GridPane.columnIndex="1" GridPane.rowIndex="1">
             <panes>
-                <TitledPane animated="false" text="Priority Level 1 ">
+                <TitledPane animated="false" text="Priority Level 1 " textFill="#e41010">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="17.0" prefHeight="17.0" prefWidth="460.0" text="Task #2" textAlignment="CENTER" />
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="Task #1" textAlignment="CENTER" />
-                            </children>
+                     <children>
+                        <Button alignment="BOTTOM_LEFT" layoutX="-5.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #1" />
+                        <Button alignment="BOTTOM_LEFT" layoutX="-4.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #2" />
+                        <Label layoutX="416.0" layoutY="6.0" text="School" textFill="#0ec1e1" />
+                        <Label layoutX="416.0" layoutY="31.0" text="Music" textFill="#e429a3" />
+                     </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
-                <TitledPane animated="false" text="Priority Level 2">
+                <TitledPane animated="false" text="Priority Level 2" textFill="#e49711">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="Task #3" textAlignment="CENTER" />
-                            </children>
+                     <children>
+                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #3" />
+                        <Label layoutX="408.0" layoutY="4.0" text="School" textFill="#0ec1e1" />
+                     </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
-                <TitledPane animated="false" text="Priority Level 3">
+                <TitledPane animated="false" text="Priority Level 3" textFill="#88da0c">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="460.0" text="Task #4" textAlignment="CENTER" />
-                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="17.0" prefHeight="17.0" prefWidth="460.0" text="Task #5" textAlignment="CENTER" />
-                            </children>
+                     <children>
+                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #4" />
+                        <Button alignment="BOTTOM_LEFT" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #5" />
+                        <Label layoutX="415.0" layoutY="4.0" text="Work" textFill="#0c16da" />
+                        <Label layoutX="415.0" layoutY="29.0" text="Work" textFill="#0c16da" />
+                     </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
