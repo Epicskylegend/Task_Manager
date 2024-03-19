@@ -3,10 +3,19 @@ package com.example.task_manager;
 interface PriorityInterface {
     int getPriorityLevel();
 }
-public class Priority {
+public class Priority implements PriorityInterface{
     private int priorityLevel;
     private String priorityColor;
 
+    public Priority() {
+        this.priorityLevel = 0;
+    }
+    public Priority(int priorityLevel, String priorityColor){
+        this.priorityColor = priorityColor;
+        this.priorityColor = priorityColor;
+    }
+
+    @Override
     public int getPriorityLevel() {
         return this.priorityLevel;
     }
