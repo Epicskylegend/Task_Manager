@@ -37,6 +37,9 @@ dependencies {
         exclude(group: 'org.openjfx')
     }
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
+    implementation 'org.postgresql:postgresql:42.7.3'
+
+    implementation'com.microsoft.sqlserver:mssql-jdbc:12.6.1.jre11'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
