@@ -17,18 +17,10 @@ public class  AddTaskController {
     @FXML
     private TextField taskDescriptionField;
 
-    @FXML
-    private Button saveButton;
+//    public void saveTask(){
+//        String taskName = taskNameField.getText();
+//        String taskDescription = taskDescriptionField.getText();
+//        Task newTask = new Task(taskName, taskDescription);
+//    }
 
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private void handleCancelButtonAction() {
-        // Get a reference to the cancel button's stage
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-
-        // Close the stage (window)
-        stage.close();
-    }
 }
