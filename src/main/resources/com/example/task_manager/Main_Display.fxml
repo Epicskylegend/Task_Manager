@@ -24,13 +24,13 @@
     <children>
         <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
             <children>
-                <Button mnemonicParsing="false" text="+New Task" textFill="#3a831d" />
+                <Button fx:id="newTask" mnemonicParsing="false" onAction="#handleButtonAction" text="+New Task" textFill="#3a831d" />
                 <ComboBox fx:id="catComboBox" prefWidth="150.0" promptText="Filter by Category" />
             </children>
         </VBox>
         <Accordion GridPane.columnIndex="1" GridPane.rowIndex="1">
             <panes>
-                <TitledPane animated="false" text="Priority Level 1 " textFill="#e41010">
+                <TitledPane fx:id="priorityLevel1" animated="false" text="Priority Level 1 " textFill="#e41010">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
