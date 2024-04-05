@@ -4,6 +4,7 @@ module com.example.task_manager {
 
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
     opens com.example.task_manager to javafx.fxml;
     exports com.example.task_manager;
