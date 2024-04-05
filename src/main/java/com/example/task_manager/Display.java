@@ -1,5 +1,6 @@
 package com.example.task_manager;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Display {
@@ -28,6 +29,10 @@ public class Display {
         Task task = new Task(name, description);
         taskList.add(task);
         return task;
+    }
+
+    public ArrayList<Task> getTasks() {
+        return (ArrayList<Task>) this.taskList.clone();
     }
 
     public boolean removeTask(Task task){

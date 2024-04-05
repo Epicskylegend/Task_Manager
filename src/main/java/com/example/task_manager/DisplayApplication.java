@@ -15,6 +15,8 @@ public class DisplayApplication extends Application {
         stage.setTitle("Task Manager Main Screen");
         stage.setScene(scene);
         stage.show();
+
+        //Scene scene1 = new Scene()
     }
 
     public static void main(String[] args) {

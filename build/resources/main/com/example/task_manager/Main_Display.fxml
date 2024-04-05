@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,38 +27,31 @@
                 <ComboBox fx:id="catComboBox" prefWidth="150.0" promptText="Filter by Category" />
             </children>
         </VBox>
-        <Accordion GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <Accordion fx:id="screen" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <panes>
-                <TitledPane animated="false" text="Priority Level 1 " textFill="#e41010">
+                <TitledPane fx:id="priorityLevel1" animated="false" text="Priority Level 1 " textFill="#e41010">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button alignment="BOTTOM_LEFT" layoutX="-5.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #1" />
-                        <Button alignment="BOTTOM_LEFT" layoutX="-4.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #2" />
-                        <Label layoutX="416.0" layoutY="6.0" text="School" textFill="#0ec1e1" />
-                        <Label layoutX="416.0" layoutY="31.0" text="Music" textFill="#e429a3" />
+                        <VBox fx:id="vBox2" prefHeight="280.0" prefWidth="454.0" />
                      </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
-                <TitledPane animated="false" text="Priority Level 2" textFill="#e49711">
+                <TitledPane fx:id="priorityLevel2" animated="false" text="Priority Level 2" textFill="#e49711">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #3" />
-                        <Label layoutX="408.0" layoutY="4.0" text="School" textFill="#0ec1e1" />
+                        <VBox fx:id="vBox" layoutY="-3.0" prefHeight="280.0" prefWidth="454.0" />
                      </children>
                         </AnchorPane>
                     </content>
                 </TitledPane>
-                <TitledPane animated="false" text="Priority Level 3" textFill="#88da0c">
+                <TitledPane fx:id="priorityLevel3" animated="false" text="Priority Level 3" textFill="#88da0c">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button alignment="BOTTOM_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #4" />
-                        <Button alignment="BOTTOM_LEFT" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="466.0" text="Task #5" />
-                        <Label layoutX="415.0" layoutY="4.0" text="Work" textFill="#0c16da" />
-                        <Label layoutX="415.0" layoutY="29.0" text="Work" textFill="#0c16da" />
+                        <VBox fx:id="vBox1" prefHeight="280.0" prefWidth="454.0" />
                      </children>
                         </AnchorPane>
                     </content>
