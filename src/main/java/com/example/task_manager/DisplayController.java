@@ -110,50 +110,10 @@ public class  DisplayController {
                 //((Button) button1).setGraphic(new HBox(new Label("test1"), new Label("Test2")));
             }
         }
-        vBox1.setMinWidth(vBox1.getParent().getLayoutX());
 
         b1.setTaskName("Test to see if this works");
 
         Node variable = priorityLevel1.getContent();
         //*/
-    }
-
-    public class taskButton extends Button{
-        Task task;
-        HBox buttonContents;
-
-        public taskButton(String name, String description){
-            super("");
-            Double buttonWidth = vBox1.getPrefWidth(); //add logic here to get width of the vbox of correct priority
-            super.setPrefWidth(buttonWidth);
-            this.task = new Task(name, description);
-            // spacer created space between left and right side of button for task name and category
-            Region spacer = new Region();
-            HBox.setHgrow(spacer, Priority.ALWAYS);
-            this.buttonContents = new HBox(new Label(name), spacer, new Label(description));
-            this.buttonContents.setAlignment(Pos.BOTTOM_LEFT); // this is the line that causes problems
-            super.setGraphic(this.buttonContents);
-
-            this.setOnAction(actionEvent -> {
-                //call task display method for task
-                System.out.println("Button " + task.getName() + " clicked!");
-            });
-        }
-
-        public Task getTask() {
-            return task;
-        }
-
-        public void setTaskName (String name){
-            task.setName(name);
-            buttonContents.getChildren().set(0, new Label(name));
-//            ObservableList<Node> childList = buttonContents.getChildren(); //unsure if I need this
-//            buttonContents.setAlignment(Pos.BASELINE_LEFT);
-            super.setGraphic(buttonContents);
-        }
-
-        public void setTaskDescription(String description){
-            task.setDescription(description);
-        }
     }
 }
