@@ -72,7 +72,7 @@ public class  DisplayController {
         //vBox1.getChildren().add(new taskButton("Hello", "world"));
 
         // test stuff to see how buttons being created work
-        /*
+        ///*
         ArrayList<Button> myButtons = new ArrayList<>();
         myButtons.add(new Button("Hello"));
         myButtons.add(new Button("World"));
