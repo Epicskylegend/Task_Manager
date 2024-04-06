@@ -11,7 +11,7 @@ public class Priority implements PriorityInterface{
         this.priorityLevel = 0;
     }
     public Priority(int priorityLevel, String priorityColor){
-        this.priorityColor = priorityColor;
+        this.priorityLevel = priorityLevel;
         this.priorityColor = priorityColor;
     }
 
