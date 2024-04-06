@@ -9,6 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -19,7 +22,7 @@ import java.util.ArrayList;
 
 public class  DisplayController {
 
-    Display display = new Display();
+    Display display;
 
     @FXML
     private ComboBox<String> catComboBox;
@@ -65,6 +68,7 @@ public class  DisplayController {
 
     @FXML
     public void initialize() {
+        this.display = new Display();
         catComboBox.getItems().removeAll(catComboBox.getItems());
         catComboBox.getItems().addAll("School", "Music", "Work");
 
@@ -74,10 +78,10 @@ public class  DisplayController {
         // test stuff to see how buttons being created work
         ///*
         ArrayList<Button> myButtons = new ArrayList<>();
-        myButtons.add(new Button("Hello"));
-        myButtons.add(new Button("World"));
-        myButtons.add(new Button("This is a "));
-        myButtons.add(new Button("Test"));
+        myButtons.add(new taskButton("Hello", ""));
+        myButtons.add(new taskButton("World", ""));
+        myButtons.add(new taskButton("This is a ", ""));
+        myButtons.add(new taskButton("Test", ""));
         taskButton b1 = new taskButton("TASKBUTTON", "desc");
         myButtons.add(b1);
 
@@ -90,12 +94,15 @@ public class  DisplayController {
         vBox1.getChildren().add(new Button("See if this works"));
         for (Node button1 : vBox1.getChildren()){
             if (button1 instanceof Button){
-                ((Button) button1).setPrefWidth(width);
-                ((Button) button1).setAlignment(Pos.BOTTOM_LEFT);
-                button1.setStyle("-fx-background-color: #38BB26");
+                //((Button) button1).setPrefWidth(width);
+                //((Button) button1).setAlignment(Pos.BOTTOM_LEFT);
+                //button1.setStyle("-fx-background-color: #38BB26");
+                //((Button) button1).setGraphic(new HBox(new Label("test1"), new Label("Test2")));
             }
         }
         vBox1.setMinWidth(vBox1.getParent().getLayoutX());
+
+        b1.setTaskName("Test to see if this works");
 
         Node variable = priorityLevel1.getContent();
         //*/
@@ -103,17 +110,24 @@ public class  DisplayController {
 
     public class taskButton extends Button{
         Task task;
-        VBox vBox;
-        Label descLabel;
+        HBox buttonContents;
 
         public taskButton(String name, String description){
-            super(name);
+            super("");
+            Double buttonWidth = vBox1.getPrefWidth(); //add logic here to get width of the vbox of correct priority
+            super.setPrefWidth(buttonWidth);
             this.task = new Task(name, description);
-            this.descLabel = new Label(description);
-            ObservableList<Node> list = super.getChildren();
-            list.add(this.descLabel);
-            this.descLabel.setVisible(true);
-            //vBox.getParent();
+            // spacer created space between left and right side of button for task name and category
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            this.buttonContents = new HBox(new Label(name), spacer, new Label(description));
+            this.buttonContents.setAlignment(Pos.BOTTOM_LEFT); // this is the line that causes problems
+            super.setGraphic(this.buttonContents);
+
+            this.setOnAction(actionEvent -> {
+                //call task display method for task
+                System.out.println("Button " + task.getName() + " clicked!");
+            });
         }
 
         public Task getTask() {
@@ -122,7 +136,10 @@ public class  DisplayController {
 
         public void setTaskName (String name){
             task.setName(name);
-            super.setText(name);
+            buttonContents.getChildren().set(0, new Label(name));
+//            ObservableList<Node> childList = buttonContents.getChildren(); //unsure if I need this
+//            buttonContents.setAlignment(Pos.BASELINE_LEFT);
+            super.setGraphic(buttonContents);
         }
 
         public void setTaskDescription(String description){
