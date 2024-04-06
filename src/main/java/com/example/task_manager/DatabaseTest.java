@@ -12,15 +12,10 @@ public class DatabaseTest {
 
     public static void main(String[] args) {
         try {
-          Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO test_table (name, age) VALUES (?, ?)");
-            // Set parameters for the prepared statement
-            preparedStatement.setString(1, "John Doe");
-            preparedStatement.setInt(2, 30);
-            preparedStatement.executeUpdate();
-            System.out.println("Data inserted successfully.");
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
         } catch (Exception e) {
             e.printStackTrace(); // Handle or log the exception
-        } 
+        }
     }
 }
