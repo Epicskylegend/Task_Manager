@@ -93,7 +93,7 @@ public class  DisplayController {
     @FXML
     public void initialize() {
         catComboBox.getItems().removeAll(catComboBox.getItems());
-        catComboBox.getItems().addAll("School", "Music", "Work");
+        catComboBox.getItems().addAll("No Filter", "School", "Music", "Work");
 
         //vBox1.getChildren().add(new Button("Hello"));
         //vBox1.getChildren().add(new taskButton("Hello", "world"));
