@@ -35,8 +35,8 @@ public class  AddTaskController {
         String categoryColor = changeColor();
         Category newCategory = new Category(categoryName, categoryColor);
 
-//        int priorityLevel = priorityComboBox.getValue().intValue();
-//        Priority newPriority = new Priority(priorityLevel, "red");
+        int priorityLevel = priorityComboBox.getValue().intValue();
+        Priority newPriority = new Priority(priorityLevel, "red");
 
 //        System.out.println(newTask.getName());
 //        System.out.println(newTask.getDescription());
