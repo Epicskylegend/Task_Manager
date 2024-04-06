@@ -27,9 +27,9 @@
                 <Label text="Task Description" GridPane.rowIndex="1" />
                 <Label text="Task Category" GridPane.rowIndex="2" />
                 <Label text="Task Priority" GridPane.rowIndex="3" />
-                <TextField GridPane.columnIndex="1" />
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="taskNameField" GridPane.columnIndex="1" />
+                <TextField fx:id="taskDescriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="taskCategoryField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ComboBox prefWidth="150.0" promptText="Choose/Create Category" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
             <padding>
