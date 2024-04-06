@@ -7,12 +7,14 @@ public class Task {
     private Priority priority;
     private ArrayList<Category> categories;
     private String description;
+    private Boolean completionStatus;
 
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
         categories = new ArrayList<Category>();
         priority = new Priority();
+        completionStatus = false;
     }
 
     public String getName() {
@@ -47,5 +49,13 @@ public class Task {
     
     public void assignPriority(Priority priority){
         this.priority = priority;
+    }
+
+    public void setCompletionStatus(Boolean completionStatus){
+        this.completionStatus = completionStatus;
+    }
+
+    public Boolean getCompletionStatus(){
+        return this.completionStatus;
     }
 }
