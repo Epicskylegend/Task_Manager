@@ -2,10 +2,7 @@ package com.example.task_manager;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.PickResult;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -21,26 +18,44 @@ public class  AddTaskController {
     private TextField taskDescriptionField;
 
     @FXML
-    private TextField taskCategoryField;
+    private ComboBox<String> addCatComboBox;
 
     @FXML
     private ColorPicker myColorPicker;
+
+    @FXML
+    private ComboBox<Integer> priorityComboBox;
 
     public void saveTask(){
         String taskName = taskNameField.getText();
         String taskDescription = taskDescriptionField.getText();
         Task newTask = new Task(taskName, taskDescription);
-        String categoryName = taskCategoryField.getText();
+
+        String categoryName = addCatComboBox.getValue();
         String categoryColor = changeColor();
         Category newCategory = new Category(categoryName, categoryColor);
-        System.out.println(newTask.getName());
-        System.out.println(newCategory.getCategoryColor());
-    //database stuff
+
+//        int priorityLevel = priorityComboBox.getValue().intValue();
+//        Priority newPriority = new Priority(priorityLevel, "red");
+
+//        System.out.println(newTask.getName());
+//        System.out.println(newTask.getDescription());
+//        System.out.println(newCategory.getName());
+//        System.out.println(newCategory.getCategoryColor());
+//        System.out.println(newPriority.getPriorityLevel());
+//        System.out.println(newPriority.getPriorityColor());
+
+        //database stuff
     }
     public String changeColor(){
         String myColor = myColorPicker.getValue().toString();
         return myColor;
 
+    }
+    @FXML
+    public void initialize(){
+        priorityComboBox.getItems().removeAll(priorityComboBox.getItems());
+        priorityComboBox.getItems().addAll(1,2,3 );
     }
 
 }
