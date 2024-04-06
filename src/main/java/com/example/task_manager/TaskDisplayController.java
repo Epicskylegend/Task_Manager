@@ -17,10 +17,11 @@ public class  TaskDisplayController {
     @FXML
     private TextField taskDescriptionField;
 
-//    public void saveTask(){
-//        String taskName = taskNameField.getText();
-//        String taskDescription = taskDescriptionField.getText();
-//        Task newTask = new Task(taskName, taskDescription);
-//    }
+    public void saveTask(){
+        String taskName = taskNameField.getText();
+        String taskDescription = taskDescriptionField.getText();
+        Task newTask = new Task(taskName, taskDescription);
+        System.out.println(newTask.getName());
+    }
 
 }

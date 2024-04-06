@@ -53,15 +53,42 @@ public class  DisplayController {
             dialog.setTitle("Add Task Window");
             DialogPane dialogPane = new DialogPane();
             dialogPane.setContent(root1);
-            dialogPane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+            ButtonType buttonTypeOk = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            dialogPane.getButtonTypes().addAll(buttonTypeOk, ButtonType.CANCEL);
             dialog.setDialogPane(dialogPane);
+            AddTaskController addTaskController = fxmlLoader.getController();
+
+            // Event handler for the OK button
+            Node okButton = dialogPane.lookupButton(buttonTypeOk);
+            okButton.addEventFilter(ActionEvent.ACTION, e -> {
+                // Call the saveTask method from AddTaskController
+                addTaskController.saveTask();
+            });
             dialog.showAndWait();
+
 
         } catch (IOException e) {
             System.out.println("Can't load the dialog");
             e.printStackTrace();
         }
     }
+//    void handleButtonAction(ActionEvent event) {
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Add_Task.fxml"));
+//            Parent root1 = fxmlLoader.load();
+//            Dialog<ButtonType> dialog = new Dialog<>();
+//            dialog.setTitle("Add Task Window");
+//            DialogPane dialogPane = new DialogPane();
+//            dialogPane.setContent(root1);
+//            dialogPane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+//            dialog.setDialogPane(dialogPane);
+//            dialog.showAndWait();
+//
+//        } catch (IOException e) {
+//            System.out.println("Can't load the dialog");
+//            e.printStackTrace();
+//        }
+//    }
 
     @FXML
     public void initialize() {
