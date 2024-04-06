@@ -24,10 +24,16 @@ public class Display {
         //
     }
 
-    public Task addTask(String name, String description){
+    //adds task to taskList if it does not already exist and returns true or false if there already exists task in taskList
+    public Boolean addTask(String name, String description){
         Task task = new Task(name, description);
+        for (Task t : taskList){
+            if (t.getName().equals(name) && t.getDescription().equals(description)){
+                return false;
+            }
+        }
         taskList.add(task);
-        return task;
+        return true;
     }
 
     public boolean removeTask(Task task){
@@ -38,5 +44,9 @@ public class Display {
             }
         }
         return false;
+    }
+
+    public void updateTaskList(ArrayList<Task> taskList){
+        this.taskList = taskList;
     }
 }
