@@ -12,7 +12,7 @@ public class DatabaseTest {
 
     public static void main(String[] args) {
         try {
-          Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
         } catch (Exception e) {
             e.printStackTrace(); // Handle or log the exception
