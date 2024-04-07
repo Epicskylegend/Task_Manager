@@ -25,13 +25,7 @@ public class Display {
     }
 
     //adds task to taskList if it does not already exist and returns true or false if there already exists task in taskList
-    public void addTask(Task task) throws Exception {
-        for (Task t : taskList){
-            if (t.getName().equals(task.getName()) && t.getDescription().equals(task.getDescription())){
-                throw new DuplicateTaskException("Attempted to create a task that already exists.");
-            }
-        }
-        this.addCategory(task.getCategory());
+    public void addTask(Task task){
         taskList.add(task);
     }
 
