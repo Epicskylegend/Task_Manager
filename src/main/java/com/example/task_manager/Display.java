@@ -7,13 +7,11 @@ public class Display {
     private Search search;
     private Filter filter;
     private ArrayList<Task> taskList;
-    private ArrayList<Category> categories;
 
     public Display(){
         this.search = new Search();
         this.filter = new Filter();
         this.taskList = new ArrayList<>();
-        this.categories = new ArrayList<>();
     }
 
     //updates view of display
@@ -52,17 +50,17 @@ public class Display {
     }
 
     public ArrayList<Category> getCategories(){
-        return this.categories;
+        return this.filter.getFilter();
     }
 
-    public void addCategory(Category category) throws Exception {
+    public void addCategory(Category category) throws DuplicateCategoryException {
 
-        for (Category c : this.categories){
-            if (category.getName().equals(c.getName())){
-                throw new DuplicateCategoryException("Attempted to create a new category that already exists.");
-            }
-        }
+//        for (Category c : this.filter.getFilter()){
+//            if (category.getName().equals(c.getName())){
+//                throw new DuplicateCategoryException("Attempted to create a new category that already exists.");
+//            }
+//        }
 
-        this.categories.add(category);
+        filter.addFilter(category);
     }
 }
