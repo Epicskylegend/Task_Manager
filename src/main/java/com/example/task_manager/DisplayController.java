@@ -87,26 +87,6 @@ public class  DisplayController {
             e.printStackTrace();
         }
     }
-    @FXML
-    void handleNewWindow(ActionEvent event){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Task_Display.fxml"));
-            BorderPane root1 = fxmlLoader.load();
-
-            // Create a new stage for the dialog window
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Task Description");
-            Scene scene = new Scene(root1);
-            dialogStage.setScene(scene);
-
-            // Show the dialog window
-            dialogStage.showAndWait();
-        } catch (IOException e) {
-            System.out.println("Can't load the dialog");
-            e.printStackTrace();
-        }
-    }
-
 
     @FXML
     public void initialize() {

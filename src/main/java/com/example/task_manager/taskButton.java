@@ -1,12 +1,15 @@
 package com.example.task_manager;
 
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class taskButton extends Button {
     Task task;
@@ -28,9 +31,24 @@ public class taskButton extends Button {
         this.buttonContents.setAlignment(Pos.BOTTOM_LEFT); // this is the line that causes problems
         super.setGraphic(this.buttonContents);
 
+        // Creates new window for task
         this.setOnAction(actionEvent -> {
-            //call task display method for task
-            System.out.println("Button " + t.getName() + " clicked!");
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Task_Display.fxml"));
+                BorderPane root1 = fxmlLoader.load();
+
+                // Create a new stage for the dialog window
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("Task Description");
+                Scene scene = new Scene(root1);
+                dialogStage.setScene(scene);
+
+                // Show the dialog window
+                dialogStage.showAndWait();
+            } catch (IOException e) {
+                System.out.println("Can't load the dialog");
+                e.printStackTrace();
+            }
         });
     }
 

@@ -25,7 +25,6 @@
             <children>
                 <Button fx:id="newTask" mnemonicParsing="false" onAction="#handleButtonAction" text="+New Task" textFill="#3a831d" />
                 <ComboBox fx:id="catComboBox" prefWidth="150.0" promptText="Filter by Category" />
-            <Button mnemonicParsing="false" onAction="#handleNewWindow" text="TEST" />
             </children>
         </VBox>
         <Accordion GridPane.columnIndex="1" GridPane.rowIndex="1">
