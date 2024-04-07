@@ -15,8 +15,37 @@ public class DatabaseClient {
         Connection connection = connect();
         PreparedStatement st = connection.prepareStatement("INSERT INTO Tasks (task_name, task_description, category_name, category_color, priority_level) Values(?,?,?,?,?)");
         st.setString(1, task.getName());
-        st.setString(1, task.getDescription());
+        st.setString(2, task.getDescription());
+        st.setString(3, task.getCategory().getName());
+        st.setString(4, task.getCategory().getCategoryColor());
+        st.setInt(5, task.getPriorityLevel());
 
+        st.executeUpdate();
+        st.close();connection.close();
+    }
+
+    public void editTask(Task task) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement st = connection.prepareStatement("UPDATE Tasks SET Task_name=?, task_description=?, category_name=?, category_color=?, priority_level=?, WHERE id=?");
+        st.setString(1, task.getName());
+        st.setString(2, task.getDescription());
+        st.setString(3, task.getCategory().getName());
+        st.setString(4, task.getCategory().getCategoryColor());
+        st.setInt(5, task.getPriorityLevel());
+
+        st.executeUpdate();
+        st.close();
+        connection.close();
+    }
+
+    public void deleteTask(Task task) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement st = connection.prepareStatement("DELETE FROM Tasks WHERE id=?");
+        st.setInt(1, task.getID());
+
+        st.executeUpdate();
+        st.close();
+        connection.close();
     }
 
     private Connection connect() throws SQLException {

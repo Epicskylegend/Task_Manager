@@ -2,19 +2,26 @@ package com.example.task_manager;
 
 import java.util.ArrayList;
 
+
 public class Task {
+    private int id;
     private String name;
     private Priority priority;
     private Category category;
     private String description;
     private Boolean completionStatus;
 
-    public Task(String name, String description, String categoryName, String categoryColor, int priority) {
+    public Task(int id, String name, String description, String categoryName, String categoryColor, int priority) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.category = new Category(categoryName, categoryColor);
         this.priority = new Priority(priority);
         completionStatus = false;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public String getName() {
