@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class Display {
 
+    private DatabaseClient dbClient;
     private Search search;
     private Filter filter;
     private ArrayList<Task> taskList;
 
     public Display(){
+        this.dbClient = new DatabaseClient();
         this.search = new Search();
         this.filter = new Filter();
         this.taskList = new ArrayList<>();
