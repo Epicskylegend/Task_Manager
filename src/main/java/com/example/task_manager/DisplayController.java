@@ -8,11 +8,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
@@ -75,6 +72,26 @@ public class  DisplayController {
             e.printStackTrace();
         }
     }
+    @FXML
+    void handleNewWindow(ActionEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Task_Display.fxml"));
+            BorderPane root1 = fxmlLoader.load();
+
+            // Create a new stage for the dialog window
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Task Description");
+            Scene scene = new Scene(root1);
+            dialogStage.setScene(scene);
+
+            // Show the dialog window
+            dialogStage.showAndWait();
+        } catch (IOException e) {
+            System.out.println("Can't load the dialog");
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     public void initialize() {
