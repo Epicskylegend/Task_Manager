@@ -5,15 +5,15 @@ import java.util.ArrayList;
 public class Task {
     private String name;
     private Priority priority;
-    private ArrayList<Category> categories;
+    private Category category;
     private String description;
     private Boolean completionStatus;
 
-    public Task(String name, String description) {
+    public Task(String name, String description, String categoryName, String categoryColor, int priority) {
         this.name = name;
         this.description = description;
-        categories = new ArrayList<Category>();
-        priority = new Priority();
+        this.category = new Category(categoryName, categoryColor);
+        this.priority = new Priority(priority);
         completionStatus = false;
     }
 
@@ -42,13 +42,25 @@ public class Task {
         this.description = description;
         return this;
     }
-    
-    public void assignCategory(Category category){
-        categories.add(category);
+
+    public void setCategory(Category category){
+        this.category = category;
+    }
+
+    public Category getCategory(){
+        return this.category;
     }
     
     public void assignPriority(Priority priority){
         this.priority = priority;
+    }
+
+    public int getPriorityLevel() {
+        return priority.getPriorityLevel();
+    }
+
+    public String getPriorityColor() {
+        return priority.getPriorityColor();
     }
 
     public void setCompletionStatus(Boolean completionStatus){
