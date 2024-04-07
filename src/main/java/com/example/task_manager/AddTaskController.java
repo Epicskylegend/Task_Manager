@@ -2,10 +2,14 @@ package com.example.task_manager;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.PickResult;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class  AddTaskController {
     @FXML
@@ -26,26 +30,29 @@ public class  AddTaskController {
     @FXML
     private ComboBox<Integer> priorityComboBox;
 
-    public void saveTask(){
+    public Task saveTask(Display display){
         String taskName = taskNameField.getText();
         String taskDescription = taskDescriptionField.getText();
-        Task newTask = new Task(taskName, taskDescription);
 
         String categoryName = addCatComboBox.getValue();
         String categoryColor = changeColor();
-        Category newCategory = new Category(categoryName, categoryColor);
+        //Category newCategory = new Category(categoryName, categoryColor);
 
-        int priorityLevel = priorityComboBox.getValue().intValue();
+        int priorityLevel = priorityComboBox.getValue();
         Priority newPriority = new Priority(priorityLevel, "red");
 
-        System.out.println(newTask.getName());
-        System.out.println(newTask.getDescription());
-        System.out.println(newCategory.getName());
-        System.out.println(newCategory.getCategoryColor());
-        System.out.println(newPriority.getPriorityLevel());
-        System.out.println(newPriority.getPriorityColor());
+        Task newTask = new Task(taskName, taskDescription, categoryName, categoryColor, priorityLevel);
 
-        //database stuff
+        try {
+            display.addTask(newTask);
+
+            //save task to database
+
+            return newTask;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
     public String changeColor(){
         String myColor = myColorPicker.getValue().toString();
