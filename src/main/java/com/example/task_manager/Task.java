@@ -11,13 +11,15 @@ public class Task {
     private String description;
     private Boolean completionStatus;
 
-    public Task(int id, String name, String description, String categoryName, String categoryColor, int priority) {
-        this.id = id;
+    public Task(String name, String description, String categoryName, String categoryColor, int priority) {
         this.name = name;
         this.description = description;
         this.category = new Category(categoryName, categoryColor);
         this.priority = new Priority(priority);
         completionStatus = false;
+    }
+    public void setID(int id) {
+        this.id = id;
     }
 
     public int getID() {
