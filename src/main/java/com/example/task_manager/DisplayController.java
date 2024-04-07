@@ -103,6 +103,7 @@ public class  DisplayController {
         databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
         databaseTasks.add(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
         databaseTasks.add(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
+        databaseTasks.add(new Task("Color Test", "", "Color Test", "#4d3399", 1));
         //can add more tasks for example database
 
         for (Task t : databaseTasks){

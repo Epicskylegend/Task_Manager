@@ -35,7 +35,7 @@ public class  AddTaskController {
         String taskDescription = taskDescriptionField.getText();
 
         String categoryName = addCatComboBox.getValue();
-        String categoryColor = changeColor();
+        String categoryColor = hexToCss(changeColor());
         //Category newCategory = new Category(categoryName, categoryColor);
 
         int priorityLevel = priorityComboBox.getValue();
@@ -54,6 +54,16 @@ public class  AddTaskController {
         }
         return null;
     }
+
+    public String hexToCss(String colorCode){
+        if (colorCode.startsWith("0x")){
+            colorCode = colorCode.substring(2);
+            String css = "#";
+            colorCode = css + colorCode;
+        }
+        return colorCode;
+    }
+
     public String changeColor(){
         String myColor = myColorPicker.getValue().toString();
         return myColor;
