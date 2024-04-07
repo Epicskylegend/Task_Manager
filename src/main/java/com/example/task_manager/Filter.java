@@ -11,20 +11,30 @@ public class Filter {
         categoryList = new ArrayList<>();
     }
 
-    public void addFilter(Category category){
-        boolean exists = false;
+    public void addFilter(Category category) throws DuplicateCategoryException{
 
-        // checks for duplicate categories before adding category to list
         for (Category c : categoryList){
-            if (category.toString().equals(c.toString())){
-                exists = true;
-                break;
+            if (category.getName().equals(c.getName())){
+                throw new DuplicateCategoryException("Attempted to create a new category that already exists.");
             }
         }
 
-        if (!exists) {
-            categoryList.add(category);
-        }
+        categoryList.add(category);
+
+        //boolean exists = false;
+
+        // checks for duplicate categories before adding category to list
+        // unneeded, display class checks for duplicate category
+//        for (Category c : categoryList){
+//            if (category.toString().equals(c.toString())){
+//                exists = true;
+//                break;
+//            }
+//        }
+//
+//        if (!exists) {
+//            categoryList.add(category);
+//        }
     }
 
     public ArrayList<Category> getFilter() {

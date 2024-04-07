@@ -8,14 +8,12 @@ public class Display {
     private Search search;
     private Filter filter;
     private ArrayList<Task> taskList;
-    private ArrayList<Category> categories;
 
     public Display(){
         this.dbClient = new DatabaseClient();
         this.search = new Search();
         this.filter = new Filter();
         this.taskList = new ArrayList<>();
-        this.categories = new ArrayList<>();
     }
 
     //updates view of display
@@ -29,13 +27,7 @@ public class Display {
     }
 
     //adds task to taskList if it does not already exist and returns true or false if there already exists task in taskList
-    public void addTask(Task task) throws Exception {
-        for (Task t : taskList){
-            if (t.getName().equals(task.getName()) && t.getDescription().equals(task.getDescription())){
-                throw new DuplicateTaskException("Attempted to create a task that already exists.");
-            }
-        }
-        this.addCategory(task.getCategory());
+    public void addTask(Task task){
         taskList.add(task);
     }
 
@@ -54,17 +46,17 @@ public class Display {
     }
 
     public ArrayList<Category> getCategories(){
-        return this.categories;
+        return this.filter.getFilter();
     }
 
-    public void addCategory(Category category) throws Exception {
+    public void addCategory(Category category) throws DuplicateCategoryException {
 
-        for (Category c : this.categories){
-            if (category.getName().equals(c.getName())){
-                throw new DuplicateCategoryException("Attempted to create a new category that already exists.");
-            }
-        }
+//        for (Category c : this.filter.getFilter()){
+//            if (category.getName().equals(c.getName())){
+//                throw new DuplicateCategoryException("Attempted to create a new category that already exists.");
+//            }
+//        }
 
-        this.categories.add(category);
+        filter.addFilter(category);
     }
 }
