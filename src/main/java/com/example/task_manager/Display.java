@@ -29,6 +29,11 @@ public class Display {
     //adds task to taskList if it does not already exist and returns true or false if there already exists task in taskList
     public void addTask(Task task){
         taskList.add(task);
+        try {
+            addCategory(task.getCategory());
+        } catch (DuplicateCategoryException e) {
+            //do nothing
+        }
     }
 
     public boolean removeTask(Task task){
@@ -41,12 +46,20 @@ public class Display {
         return false;
     }
 
+    public ArrayList<Task> getTaskList(){
+        return this.taskList;
+    }
+
     public void updateTaskList(ArrayList<Task> taskList){
         this.taskList = taskList;
     }
 
     public ArrayList<String> getCategories(){
         return this.filter.getCategoryList();
+    }
+
+    public Filter getFilter(){
+        return this.filter;
     }
 
     public void addCategory(Category category) throws DuplicateCategoryException {

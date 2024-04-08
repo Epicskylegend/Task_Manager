@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class  DisplayController {
 
     DatabaseClient dbClient = new DatabaseClient();
-    Display display;
+    private Display display;
 
     @FXML
     private ComboBox<String> catComboBox;
@@ -58,11 +58,13 @@ public class  DisplayController {
             dialog.setDialogPane(dialogPane);
             AddTaskController addTaskController = fxmlLoader.getController();
 
+            addTaskController.setFilter(display.getFilter());
+
             // Event handler for the OK button
             Node okButton = dialogPane.lookupButton(buttonTypeOk);
             okButton.addEventFilter(ActionEvent.ACTION, e -> {
                 // Call the saveTask method from AddTaskController
-                System.out.println(this);
+                //System.out.println(this);
                 addTaskController.saveTask(display, this);
             });
             dialog.showAndWait();
@@ -124,30 +126,32 @@ public class  DisplayController {
         vBox3.getChildren().clear();
 
         //try {
-            ArrayList<Task> databaseTasks = new ArrayList<>();
-            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-            databaseTasks.add(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
-            databaseTasks.add(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
-            databaseTasks.add(new Task("Color Test", "", "Color Test", "#4d3399", 1));
 
-            for (int i = 0; i < 20; i++) {
-                databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-            }
-            for (int i = 0; i < 20; i++) {
-                databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
-            }
-            for (int i = 0; i < 20; i++) {
-                databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
-            }
+            display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+            display.addTask(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
+            display.addTask(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
+            display.addTask(new Task("Color Test", "", "Color Test", "#4d3399", 1));
+
+//            for (int i = 0; i < 20; i++) {
+//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+//            }
+//            for (int i = 0; i < 20; i++) {
+//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
+//            }
+//            for (int i = 0; i < 20; i++) {
+//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
+//            }
 
             //change this to work with database
-            //ArrayList<Task> databaseTasks = dbClient.getAllTasks(); // Fetch tasks from the database
+            //ArrayList<Task> tasks = dbClient.getAllTasks(); // Fetch tasks from the database
+
+            ArrayList<Task> tasks = display.getTaskList();
 
             String categoryFilter = catComboBox.getValue();
-            String searchFilter = searchBar.getText();
+            String searchFilter = searchBar.getText().toLowerCase();
 
             // Populate the display with fetched tasks
-            for (Task t : databaseTasks){
+            for (Task t : tasks){
                 if (!(categoryFilter == null || categoryFilter.equals("None") )){
                     if (t.getCategory().getName().equals(catComboBox.getValue())){
                         if (searchFilter.equals("")){
