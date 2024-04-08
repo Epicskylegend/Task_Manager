@@ -111,10 +111,28 @@ public class  DisplayController {
             this.searchBar.setText(newValue);
             handleSearchBar();
         }));
+
+        display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+        display.addTask(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
+        display.addTask(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
+        display.addTask(new Task("Color Test", "", "Color Test", "#4d3399", 1));
+
+//            for (int i = 0; i < 20; i++) {
+//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+//            }
+//            for (int i = 0; i < 20; i++) {
+//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
+//            }
+//            for (int i = 0; i < 20; i++) {
+//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
+//            }
+
         catComboBox.getItems().removeAll(catComboBox.getItems());
-        catComboBox.getItems().addAll("None", "School", "Spare Time", "Fitness");
+//        catComboBox.getItems().addAll("None", "School", "Spare Time", "Fitness");
+        catComboBox.getItems().add("None");
 
         catComboBox.getItems().addAll(display.getCategories());
+
         populateDisplay();
     }
 
@@ -126,21 +144,6 @@ public class  DisplayController {
         vBox3.getChildren().clear();
 
         //try {
-
-            display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-            display.addTask(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
-            display.addTask(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
-            display.addTask(new Task("Color Test", "", "Color Test", "#4d3399", 1));
-
-//            for (int i = 0; i < 20; i++) {
-//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-//            }
-//            for (int i = 0; i < 20; i++) {
-//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
-//            }
-//            for (int i = 0; i < 20; i++) {
-//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
-//            }
 
             //change this to work with database
             //ArrayList<Task> tasks = dbClient.getAllTasks(); // Fetch tasks from the database
