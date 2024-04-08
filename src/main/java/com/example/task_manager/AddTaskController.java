@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class  AddTaskController {
+
+    Filter filter;
+
     @FXML
     private Label titleLabel;
 
@@ -38,6 +41,18 @@ public class  AddTaskController {
         String categoryName = addCatComboBox.getValue();
         String categoryColor = hexToCss(changeColor());
 
+        Boolean dupe = false;
+
+        for (Category c : filter.getFilter()){
+            String catName = c.getName();
+            if (catName.equalsIgnoreCase(categoryName)){
+                //to match case
+                categoryName = catName;
+                categoryColor = hexToCss(c.getCategoryColor());
+                break;
+            }
+        }
+
         int priorityLevel = priorityComboBox.getValue();
 
         Task newTask = new Task(taskName, taskDescription, categoryName, categoryColor, priorityLevel);
@@ -46,6 +61,8 @@ public class  AddTaskController {
             display.addTask(newTask);
 
             //save task to database
+
+            System.out.println(addCatComboBox.getEditor());
 
             //create task button for main display
             TaskButton button = new TaskButton(newTask);
@@ -72,6 +89,12 @@ public class  AddTaskController {
         String myColor = myColorPicker.getValue().toString();
         return myColor;
 
+    }
+
+    public void setFilter(Filter filter){
+        this.filter = filter;
+        addCatComboBox.getItems().clear();
+        addCatComboBox.getItems().addAll(filter.getCategoryList());
     }
     @FXML
     public void initialize(){
