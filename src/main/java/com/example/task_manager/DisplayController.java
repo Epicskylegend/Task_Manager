@@ -144,22 +144,5 @@ public class  DisplayController {
         vBox2.getChildren().clear();
         vBox3.getChildren().clear();
 
-        for (Task t : databaseTasks){
-            int priority = t.getPriorityLevel();
-            switch (priority){
-                case 1:
-                    vBox1.getChildren().add(new TaskButton(t));
-                    break;
-                case 2:
-                    vBox2.getChildren().add(new TaskButton(t));
-                    break;
-                case 3:
-                    vBox3.getChildren().add(new TaskButton(t));
-                    break;
-                default:
-                    System.out.println("No priority level for task " + t.getName());
-            }
-        }
-
     }
 }
