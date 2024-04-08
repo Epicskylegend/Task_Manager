@@ -45,13 +45,21 @@ public class Display {
         this.taskList = taskList;
     }
 
-    public ArrayList<Category> getCategories(){
-        return this.filter.getFilter();
+    public ArrayList<String> getCategories(){
+        return this.filter.getCategoryList();
     }
 
     public void addCategory(Category category) throws DuplicateCategoryException {
 
 
         filter.addFilter(category);
+    }
+
+    public String getSearchBarText() {
+        return search.getText();
+    }
+
+    public void setSearchBarText(String text) {
+        search.setText(text);
     }
 }
