@@ -9,11 +9,13 @@ import javafx.scene.layout.*;
 import javafx.scene.Parent;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 public class  DisplayController {
 
+    DatabaseClient dbClient = new DatabaseClient();
     Display display;
 
     @FXML
@@ -89,28 +91,58 @@ public class  DisplayController {
         catComboBox.getItems().removeAll(catComboBox.getItems());
         catComboBox.getItems().addAll("No Filter", "School", "Music", "Work");
 
-        populateDisplay();
+        populateDisplay(); // Take what's in db and put it in display
     }
 
     private void populateDisplay(){
         //implement database stuff
-        ArrayList<Task> databaseTasks = new ArrayList<>();
-        databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-        databaseTasks.add(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
-        databaseTasks.add(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
-        databaseTasks.add(new Task("Color Test", "", "Color Test", "#4d3399", 1));
+//        ArrayList<Task> databaseTasks = new ArrayList<>();
+//        databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+//        databaseTasks.add(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
+//        databaseTasks.add(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
+//        databaseTasks.add(new Task("Color Test", "", "Color Test", "#4d3399", 1));
+//
+//        for (int i = 0; i < 20; i++) {
+//            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+//        }
+//        for (int i = 0; i < 20; i++) {
+//            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
+//        }
+//        for (int i = 0; i < 20; i++) {
+//            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
+//        }
 
-        for (int i = 0; i < 20; i++) {
-            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-        }
-        for (int i = 0; i < 20; i++) {
-            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
-        }
-        for (int i = 0; i < 20; i++) {
-            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
+        try {
+            ArrayList<Task> databaseTasks = dbClient.getAllTasks(); // Fetch tasks from the database
+
+            // Populate the display with fetched tasks
+            for (Task t : databaseTasks) {
+                int priority = t.getPriorityLevel();
+                switch (priority) {
+                    case 1:
+                        vBox1.getChildren().add(new TaskButton(t));
+                        break;
+                    case 2:
+                        vBox2.getChildren().add(new TaskButton(t));
+                        break;
+                    case 3:
+                        vBox3.getChildren().add(new TaskButton(t));
+                        break;
+                    default:
+                        System.out.println("No priority level for task " + t.getName());
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching tasks from the database: " + e.getMessage());
+            e.printStackTrace();
         }
 
         //can add more tasks for example database
+
+
+        vBox1.getChildren().clear();
+        vBox2.getChildren().clear();
+        vBox3.getChildren().clear();
 
         for (Task t : databaseTasks){
             int priority = t.getPriorityLevel();
@@ -128,5 +160,6 @@ public class  DisplayController {
                     System.out.println("No priority level for task " + t.getName());
             }
         }
+
     }
 }

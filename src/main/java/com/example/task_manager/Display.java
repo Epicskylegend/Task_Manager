@@ -51,11 +51,6 @@ public class Display {
 
     public void addCategory(Category category) throws DuplicateCategoryException {
 
-//        for (Category c : this.filter.getFilter()){
-//            if (category.getName().equals(c.getName())){
-//                throw new DuplicateCategoryException("Attempted to create a new category that already exists.");
-//            }
-//        }
 
         filter.addFilter(category);
     }
