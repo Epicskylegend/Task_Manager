@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class  DisplayController {
 
-    DatabaseClient dbClient = new DatabaseClient();
     Display display;
 
     @FXML
@@ -123,60 +122,55 @@ public class  DisplayController {
         vBox2.getChildren().clear();
         vBox3.getChildren().clear();
 
-        //try {
-            ArrayList<Task> databaseTasks = new ArrayList<>();
+        ArrayList<Task> databaseTasks = new ArrayList<>();
+        databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+        databaseTasks.add(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
+        databaseTasks.add(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
+        databaseTasks.add(new Task("Color Test", "", "Color Test", "#4d3399", 1));
+
+        for (int i = 0; i < 20; i++) {
             databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-            databaseTasks.add(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
-            databaseTasks.add(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
-            databaseTasks.add(new Task("Color Test", "", "Color Test", "#4d3399", 1));
+        }
+        for (int i = 0; i < 20; i++) {
+            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
+        }
+        for (int i = 0; i < 20; i++) {
+            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
+        }
 
-            for (int i = 0; i < 20; i++) {
-                databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-            }
-            for (int i = 0; i < 20; i++) {
-                databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
-            }
-            for (int i = 0; i < 20; i++) {
-                databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
-            }
+        //change this to work with database
+        //ArrayList<Task> databaseTasks = dbClient.getAllTasks(); // Fetch tasks from the database
 
-            //change this to work with database
-            //ArrayList<Task> databaseTasks = dbClient.getAllTasks(); // Fetch tasks from the database
+        String categoryFilter = catComboBox.getValue();
+        String searchFilter = searchBar.getText();
 
-            String categoryFilter = catComboBox.getValue();
-            String searchFilter = searchBar.getText();
-
-            // Populate the display with fetched tasks
-            for (Task t : databaseTasks){
-                if (!(categoryFilter == null || categoryFilter.equals("None") )){
-                    if (t.getCategory().getName().equals(catComboBox.getValue())){
-                        if (searchFilter.equals("")){
-                            //category filter has category selected and search bar has no text
-                            displayTask(t);
-                        } else {
-                            ////category filter has category selected and search bar has text
-                            if (t.getName().toLowerCase().startsWith(searchFilter)){
-                                displayTask(t);
-                            }
-                        }
-                    }
-                } else {
-                    //category filter either has "None" selected or is on the default text field
+        // Populate the display with fetched tasks
+        for (Task t : databaseTasks){
+            if (!(categoryFilter == null || categoryFilter.equals("None") )){
+                if (t.getCategory().getName().equals(catComboBox.getValue())){
                     if (searchFilter.equals("")){
-                        //category filter either has "None" selected or is on the default text field and search bar is no text
+                        //category filter has category selected and search bar has no text
                         displayTask(t);
                     } else {
-                        //category filter either has "None" selected or is on the default text field and search bar has text
+                        ////category filter has category selected and search bar has text
                         if (t.getName().toLowerCase().startsWith(searchFilter)){
                             displayTask(t);
                         }
                     }
                 }
+            } else {
+                //category filter either has "None" selected or is on the default text field
+                if (searchFilter.equals("")){
+                    //category filter either has "None" selected or is on the default text field and search bar is no text
+                    displayTask(t);
+                } else {
+                    //category filter either has "None" selected or is on the default text field and search bar has text
+                    if (t.getName().toLowerCase().startsWith(searchFilter)){
+                        displayTask(t);
+                    }
+                }
             }
-//        } catch (SQLException e) {
-//            System.out.println("Error fetching tasks from the database: " + e.getMessage());
-//            e.printStackTrace();
-//        }
+        }
     }
 
     private void displayTask(Task t){

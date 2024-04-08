@@ -1,5 +1,6 @@
 package com.example.task_manager;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Display {
@@ -28,7 +29,13 @@ public class Display {
 
     //adds task to taskList if it does not already exist and returns true or false if there already exists task in taskList
     public void addTask(Task task){
-        taskList.add(task);
+        try {
+            taskList.add(task);
+            dbClient.createTask(task); // Add task to the database
+        } catch (SQLException e) {
+            System.out.println("Error adding task to the database: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public boolean removeTask(Task task){
