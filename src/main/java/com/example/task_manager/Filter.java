@@ -22,6 +22,16 @@ public class Filter {
         categoryList.add(category);
     }
 
+    public boolean removeFilter(Category category){
+        for (Category c : categoryList){
+            if (category.getName().equals(c.getName())){
+                categoryList.remove(c);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<Category> getFilter() {
         return categoryList;
     }
