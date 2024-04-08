@@ -6,3 +6,10 @@ CREATE TABLE Tasks (
     category_color VARCHAR(255),
     priority_level INT
 );
+
+CREATE TABLE Categories (
+    category_name VARCHAR(255),
+    category_color VARCHAR(255)
+);
+
+-- Add category name and color in category table.

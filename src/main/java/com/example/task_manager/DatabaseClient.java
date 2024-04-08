@@ -1,6 +1,7 @@
 package com.example.task_manager;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -68,4 +69,39 @@ public class DatabaseClient {
         Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         return connection;
     }
+
+
+    public ArrayList<Task> getAllTasks() throws SQLException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = connect();
+            String query = "SELECT * FROM Tasks";
+            statement = connection.prepareStatement(query);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("task_name");
+                String description = resultSet.getString("task_description");
+                String categoryName = resultSet.getString("category_name");
+                String categoryColor = resultSet.getString("category_color");
+                int priorityLevel = resultSet.getInt("priority_level");
+
+                Task task = new Task(name, description, categoryName, categoryColor, priorityLevel);
+                task.setID(id);
+                tasks.add(task);
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+
+        return tasks;
+    }
+
 }
