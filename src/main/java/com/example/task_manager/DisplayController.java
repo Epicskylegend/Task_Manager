@@ -20,6 +20,9 @@ public class  DisplayController {
     private ComboBox<String> catComboBox;
 
     @FXML
+    private TextField searchBar;
+
+    @FXML
     private Button newTask;
     @FXML
     private TitledPane priorityLevel1;
@@ -69,6 +72,18 @@ public class  DisplayController {
         }
     }
 
+    @FXML
+    void handleFilterSelect(ActionEvent event) {
+        populateDisplay();
+        //System.out.println("Search Bar: " + searchBar.getText());
+    }
+
+    @FXML
+    void handleSearchBar(){
+        populateDisplay();
+        //System.out.println(searchBar.getText());
+    }
+
     public VBox getVBox(int priority){
         switch (priority){
             case 1:
@@ -86,14 +101,26 @@ public class  DisplayController {
     @FXML
     public void initialize() {
         this.display = new Display();
+        //adds event listener to search bar to call event when text bar is updated for each change of letter
+        searchBar.textProperty().addListener(((observable, oldValue, newValue) -> {
+            display.setSearchBarText(newValue);
+            this.searchBar.setText(newValue);
+            handleSearchBar();
+        }));
         catComboBox.getItems().removeAll(catComboBox.getItems());
-        catComboBox.getItems().addAll("No Filter", "School", "Music", "Work");
+        catComboBox.getItems().addAll("None", "School", "Spare Time", "Fitness");
 
+        catComboBox.getItems().addAll(display.getCategories());
         populateDisplay();
     }
 
     private void populateDisplay(){
         //implement database stuff
+
+        vBox1.getChildren().clear();
+        vBox2.getChildren().clear();
+        vBox3.getChildren().clear();
+
         ArrayList<Task> databaseTasks = new ArrayList<>();
         databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
         databaseTasks.add(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
@@ -112,21 +139,51 @@ public class  DisplayController {
 
         //can add more tasks for example database
 
+        String categoryFilter = catComboBox.getValue();
+        String searchFilter = searchBar.getText();
+
         for (Task t : databaseTasks){
-            int priority = t.getPriorityLevel();
-            switch (priority){
-                case 1:
-                    vBox1.getChildren().add(new TaskButton(t));
-                    break;
-                case 2:
-                    vBox2.getChildren().add(new TaskButton(t));
-                    break;
-                case 3:
-                    vBox3.getChildren().add(new TaskButton(t));
-                    break;
-                default:
-                    System.out.println("No priority level for task " + t.getName());
+            if (!(categoryFilter == null || categoryFilter.equals("None") )){
+                if (t.getCategory().getName().equals(catComboBox.getValue())){
+                    if (searchFilter.equals("")){
+                        //category filter has category selected and search bar has no text
+                        displayTask(t);
+                    } else {
+                        ////category filter has category selected and search bar has text
+                        if (t.getName().toLowerCase().startsWith(searchFilter)){
+                            displayTask(t);
+                        }
+                    }
+                }
+            } else {
+                //category filter either has "None" selected or is on the default text field
+                if (searchFilter.equals("")){
+                    //category filter either has "None" selected or is on the default text field and search bar is no text
+                    displayTask(t);
+                } else {
+                    //category filter either has "None" selected or is on the default text field and search bar has text
+                    if (t.getName().toLowerCase().startsWith(searchFilter)){
+                        displayTask(t);
+                    }
+                }
             }
+        }
+    }
+
+    private void displayTask(Task t){
+        int priority = t.getPriorityLevel();
+        switch (priority){
+            case 1:
+                vBox1.getChildren().add(new TaskButton(t));
+                break;
+            case 2:
+                vBox2.getChildren().add(new TaskButton(t));
+                break;
+            case 3:
+                vBox3.getChildren().add(new TaskButton(t));
+                break;
+            default:
+                System.out.println("No priority level for task " + t.getName());
         }
     }
 }
