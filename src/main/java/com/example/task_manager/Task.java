@@ -77,6 +77,19 @@ public class Task {
         return priority.getPriorityLevel();
     }
 
+    public void setPriorityLevel(int priorityLevel){
+        switch (priorityLevel){
+            case 1:
+                this.priority = new Priority(priorityLevel, "Red");
+                break;
+            case 2:
+                this.priority = new Priority(priorityLevel, "Yellow");
+                break;
+            case 3:
+                this.priority = new Priority(priorityLevel, "Blue");
+        }
+    }
+
     public String getPriorityColor() {
         return priority.getPriorityColor();
     }

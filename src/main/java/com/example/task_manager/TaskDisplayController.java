@@ -11,13 +11,14 @@ import java.util.ArrayList;
 public class  TaskDisplayController {
     private Task task;
     private Display display;
-    private ArrayList<String> Categories = display.getCategories();
+    private Filter filter;
     public TaskDisplayController(){
 
     }
     public TaskDisplayController(Task task, Display display){
         this.task = task;
         this.display = display;
+
     }
     @FXML
     private Label taskNameField;
@@ -60,32 +61,22 @@ public class  TaskDisplayController {
         return addCatComboBox.getItems().contains(enteredText);
     }
     public void saveTask(Display display, DisplayController mainDisplayController){
-        task.setName(taskNameField.getText());
-        task.setDescription(taskDescriptionField.getText());
-
-//        task.setCategory(addCatComboBox.getValue());
         String categoryName = addCatComboBox.getValue();
         String categoryColor = hexToCss(changeColor());
-
-        int priorityLevel = priorityComboBox.getValue();
-
-//        Task newTask = new Task(taskName, taskDescription, categoryName, categoryColor, priorityLevel);
-//
-//        try {
-//            display.addTask(newTask);
-//
-//            //save task to database
-//
-//            //create task button for main display
-//            TaskButton button = new TaskButton(newTask);
-//            int priority = button.getTask().getPriorityLevel();
-//            //assign task to correct vbox
-//            VBox vbox = mainDisplayController.getVBox(priority);
-//            vbox.getChildren().add(button);
-//
-//        } catch(Exception e) {
-//            System.out.println(e.getMessage());
-//        }
+        for (Category c : filter.getFilter()){
+            String catName = c.getName();
+            if (catName.equalsIgnoreCase(categoryName)){
+                //to match case
+                categoryName = catName;
+                categoryColor = hexToCss(c.getCategoryColor());
+                break;
+            }
+        }
+        Category taskCategory = new Category(categoryName,categoryColor);
+        task.setName(taskNameField.getText());
+        task.setDescription(taskDescriptionField.getText());
+        task.setCategory(taskCategory);
+        task.setPriorityLevel(priorityComboBox.getValue());
     }
     public String hexToCss(String colorCode){
         if (colorCode.startsWith("0x")){
@@ -99,7 +90,11 @@ public class  TaskDisplayController {
     public String changeColor(){
         String myColor = myColorPicker.getValue().toString();
         return myColor;
-
     }
+//    public void setFilter(Filter filter){
+//        this.filter = filter;
+//        addCatComboBox.getItems().clear();
+//        addCatComboBox.getItems().addAll(filter.getCategoryList());
+//    }
     // need method to handle completion
 }
