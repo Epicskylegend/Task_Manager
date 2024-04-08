@@ -63,7 +63,7 @@ public class  TaskDisplayController {
         task.setName(taskNameField.getText());
         task.setDescription(taskDescriptionField.getText());
 
-        task.setCategory(addCatComboBox.getValue());
+//        task.setCategory(addCatComboBox.getValue());
         String categoryName = addCatComboBox.getValue();
         String categoryColor = hexToCss(changeColor());
 
