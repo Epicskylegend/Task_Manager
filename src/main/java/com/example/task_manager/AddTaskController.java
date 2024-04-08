@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.PickResult;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -30,16 +31,14 @@ public class  AddTaskController {
     @FXML
     private ComboBox<Integer> priorityComboBox;
 
-    public Task saveTask(Display display){
+    public void saveTask(Display display, DisplayController mainDisplayController){
         String taskName = taskNameField.getText();
         String taskDescription = taskDescriptionField.getText();
 
         String categoryName = addCatComboBox.getValue();
         String categoryColor = hexToCss(changeColor());
-        //Category newCategory = new Category(categoryName, categoryColor);
 
         int priorityLevel = priorityComboBox.getValue();
-        Priority newPriority = new Priority(priorityLevel, "red");
 
         Task newTask = new Task(taskName, taskDescription, categoryName, categoryColor, priorityLevel);
 
@@ -48,11 +47,16 @@ public class  AddTaskController {
 
             //save task to database
 
-            return newTask;
+            //create task button for main display
+            TaskButton button = new TaskButton(newTask);
+            int priority = button.getTask().getPriorityLevel();
+            //assign task to correct vbox
+            VBox vbox = mainDisplayController.getVBox(priority);
+            vbox.getChildren().add(button);
+
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
-        return null;
     }
 
     public String hexToCss(String colorCode){
