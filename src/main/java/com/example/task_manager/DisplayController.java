@@ -192,7 +192,7 @@ public class  DisplayController {
 
         //for displaying message when search bar or category makes priority have no tasks that match the filters
         for (VBox vBox : vBoxes){
-            if (vBox.getChildren().isEmpty() && !searchBar.getText().equals("")){
+            if (vBox.getChildren().isEmpty() && !display.getTaskList().isEmpty()){
                 Label label = new Label("There are no tasks that satisfy the current filters.");
                 label.setStyle("-fx-text-fill: Red");
                 vBox.getChildren().add(label);
