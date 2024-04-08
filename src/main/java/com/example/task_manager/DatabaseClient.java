@@ -32,6 +32,7 @@ public class DatabaseClient {
         } else {
             throw new SQLException("Failed to get generated task ID.");
         }
+        connection.commit();
 
         generatedKeys.close();
         st.close();
@@ -58,6 +59,8 @@ public class DatabaseClient {
 
         categorySt.executeUpdate();
         categorySt.close();
+
+        connection.commit();
 
         connection.close();
     }
