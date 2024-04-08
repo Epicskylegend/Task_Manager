@@ -15,7 +15,16 @@ public class Task {
         this.name = name;
         this.description = description;
         this.category = new Category(categoryName, categoryColor);
-        this.priority = new Priority(priority);
+        switch (priority){
+            case 1:
+                this.priority = new Priority(priority, "Red");
+                break;
+            case 2:
+                this.priority = new Priority(priority, "Yellow");
+                break;
+            case 3:
+                this.priority = new Priority(priority, "Blue");
+        }
         completionStatus = false;
     }
     public void setID(int id) {

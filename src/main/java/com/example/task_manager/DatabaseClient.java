@@ -60,6 +60,8 @@ public class DatabaseClient {
         st.executeUpdate();
         st.close();
         connection.close();
+        st.setString(1, task.getDescription());
+
     }
 
     private Connection connect() throws SQLException {
