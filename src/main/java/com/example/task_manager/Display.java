@@ -41,6 +41,10 @@ public class Display {
         return false;
     }
 
+    public ArrayList<Task> getTaskList(){
+        return this.taskList;
+    }
+
     public void updateTaskList(ArrayList<Task> taskList){
         this.taskList = taskList;
     }

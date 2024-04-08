@@ -62,7 +62,7 @@ public class  DisplayController {
             Node okButton = dialogPane.lookupButton(buttonTypeOk);
             okButton.addEventFilter(ActionEvent.ACTION, e -> {
                 // Call the saveTask method from AddTaskController
-                System.out.println(this);
+                //System.out.println(this);
                 addTaskController.saveTask(display, this);
             });
             dialog.showAndWait();
@@ -144,7 +144,11 @@ public class  DisplayController {
             //ArrayList<Task> databaseTasks = dbClient.getAllTasks(); // Fetch tasks from the database
 
             String categoryFilter = catComboBox.getValue();
-            String searchFilter = searchBar.getText();
+            String searchFilter = searchBar.getText().toLowerCase();
+
+            for (Task t : display.getTaskList()){
+                databaseTasks.add(t);
+            }
 
             // Populate the display with fetched tasks
             for (Task t : databaseTasks){
