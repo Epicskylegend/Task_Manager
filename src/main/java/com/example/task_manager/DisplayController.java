@@ -112,6 +112,11 @@ public class  DisplayController {
 
         //can add more tasks for example database
 
+
+        vBox1.getChildren().clear();
+        vBox2.getChildren().clear();
+        vBox3.getChildren().clear();
+
         for (Task t : databaseTasks){
             int priority = t.getPriorityLevel();
             switch (priority){
