@@ -35,6 +35,13 @@ public class Display {
         } catch (SQLException e) {
             System.out.println("Error adding task to the database: " + e.getMessage());
             e.printStackTrace();
+
+        taskList.add(task);
+        try {
+            addCategory(task.getCategory());
+        } catch (DuplicateCategoryException e) {
+            //do nothing
+
         }
     }
 
@@ -48,12 +55,20 @@ public class Display {
         return false;
     }
 
+    public ArrayList<Task> getTaskList(){
+        return this.taskList;
+    }
+
     public void updateTaskList(ArrayList<Task> taskList){
         this.taskList = taskList;
     }
 
     public ArrayList<String> getCategories(){
         return this.filter.getCategoryList();
+    }
+
+    public Filter getFilter(){
+        return this.filter;
     }
 
     public void addCategory(Category category) throws DuplicateCategoryException {
