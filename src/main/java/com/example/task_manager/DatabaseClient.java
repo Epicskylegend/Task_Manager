@@ -50,6 +50,15 @@ public class DatabaseClient {
 
         st.executeUpdate();
         st.close();
+
+        PreparedStatement categorySt = connection.prepareStatement("UPDATE Categories SET category_name=?, category_color=? WHERE category_name=?");
+        categorySt.setString(1, task.getCategory().getName());
+        categorySt.setString(2, task.getCategory().getCategoryColor());
+        categorySt.setString(3, task.getCategory().getName());
+
+        categorySt.executeUpdate();
+        categorySt.close();
+
         connection.close();
     }
 
@@ -102,6 +111,30 @@ public class DatabaseClient {
         }
 
         return tasks;
+    }
+
+    public ArrayList<Categories> getCategoriesLists() throws SQLException {
+        ArrayList<Categories> categoriesList = new ArrayList<>();
+        Connection connection = connect();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT category_name, category_color FROM Categories");
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String categoryName = resultSet.getString("category_name");
+                String categoryColor = resultSet.getString("category_color");
+                categoriesList.add(new Categories(categoryName) {
+                });
+            }
+
+            resultSet.close();
+            statement.close();
+        } finally {
+            connection.close();
+        }
+
+        return categoriesList;
     }
 
 }
