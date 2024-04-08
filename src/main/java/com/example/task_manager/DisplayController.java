@@ -1,16 +1,11 @@
 package com.example.task_manager;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.layout.Priority;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
 
 import java.io.IOException;
@@ -62,22 +57,8 @@ public class  DisplayController {
             Node okButton = dialogPane.lookupButton(buttonTypeOk);
             okButton.addEventFilter(ActionEvent.ACTION, e -> {
                 // Call the saveTask method from AddTaskController
-                Task t = addTaskController.saveTask(display);
-                taskButton button = new taskButton(t);
-                int priority = button.getTask().getPriorityLevel();
-                switch (priority){
-                    case 1:
-                        vBox1.getChildren().add(button);
-                        break;
-                    case 2:
-                        vBox2.getChildren().add(button);
-                        break;
-                    case 3:
-                        vBox3.getChildren().add(button);
-                        break;
-                    default:
-                        break;
-                }
+                System.out.println(this);
+                addTaskController.saveTask(display, this);
             });
             dialog.showAndWait();
 
@@ -85,6 +66,20 @@ public class  DisplayController {
         } catch (IOException e) {
             System.out.println("Can't load the dialog");
             e.printStackTrace();
+        }
+    }
+
+    public VBox getVBox(int priority){
+        switch (priority){
+            case 1:
+                return vBox1;
+            case 2:
+                return vBox2;
+            case 3:
+                return vBox3;
+            default:
+                //Should never get here
+                return null;
         }
     }
 
@@ -104,6 +99,7 @@ public class  DisplayController {
         databaseTasks.add(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
         databaseTasks.add(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
         databaseTasks.add(new Task("Color Test", "", "Color Test", "#4d3399", 1));
+
         for (int i = 0; i < 20; i++) {
             databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
         }
@@ -113,19 +109,20 @@ public class  DisplayController {
         for (int i = 0; i < 20; i++) {
             databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
         }
+
         //can add more tasks for example database
 
         for (Task t : databaseTasks){
             int priority = t.getPriorityLevel();
             switch (priority){
                 case 1:
-                    vBox1.getChildren().add(new taskButton(t));
+                    vBox1.getChildren().add(new TaskButton(t));
                     break;
                 case 2:
-                    vBox2.getChildren().add(new taskButton(t));
+                    vBox2.getChildren().add(new TaskButton(t));
                     break;
                 case 3:
-                    vBox3.getChildren().add(new taskButton(t));
+                    vBox3.getChildren().add(new TaskButton(t));
                     break;
                 default:
                     System.out.println("No priority level for task " + t.getName());

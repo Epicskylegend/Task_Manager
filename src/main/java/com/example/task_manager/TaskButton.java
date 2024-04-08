@@ -11,11 +11,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class taskButton extends Button {
+public class TaskButton extends Button {
     Task task;
     HBox buttonContents;
 
-    public taskButton(Task t){
+    public TaskButton(Task t){
         super("");
         //Double buttonWidth = vBox1.getPrefWidth(); //add logic here to get width of the vbox of correct priority
         super.setPrefWidth(Double.MAX_VALUE); // may need to change this later, unsure, but it does fill to fit currently
