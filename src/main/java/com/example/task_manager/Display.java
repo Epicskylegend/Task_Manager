@@ -28,19 +28,14 @@ public class Display {
     }
 
     //adds task to taskList if it does not already exist and returns true or false if there already exists task in taskList
-    public void addTask(Task task){
+    public void addTask(Task task) {
         try {
             taskList.add(task);
-            dbClient.createTask(task); // Add task to the database
-        } catch (SQLException e) {
+            //dbClient.createTask(task); // Add task to the database
+            addCategory(task.getCategory());
+        } catch (/*SQLException | */DuplicateCategoryException e) {
             System.out.println("Error adding task to the database: " + e.getMessage());
             e.printStackTrace();
-
-        taskList.add(task);
-        try {
-            addCategory(task.getCategory());
-        } catch (DuplicateCategoryException e) {
-            //do nothing
 
         }
     }
