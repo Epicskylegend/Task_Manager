@@ -20,24 +20,24 @@ public class Filter {
         }
 
         categoryList.add(category);
-
-        //boolean exists = false;
-
-        // checks for duplicate categories before adding category to list
-        // unneeded, display class checks for duplicate category
-//        for (Category c : categoryList){
-//            if (category.toString().equals(c.toString())){
-//                exists = true;
-//                break;
-//            }
-//        }
-//
-//        if (!exists) {
-//            categoryList.add(category);
-//        }
     }
 
     public ArrayList<Category> getFilter() {
         return categoryList;
+    }
+
+    public void updateCategoryList(ArrayList<Category> newList){
+        this.categoryList = new ArrayList<>();
+        for (Category c : newList){
+            this.categoryList.add(c);
+        }
+    }
+
+    public ArrayList<String> getCategoryList() {
+        ArrayList<String> categoriesList = new ArrayList<>();
+        for (Category c : this.categoryList){
+            categoriesList.add(c.getName());
+        }
+        return categoriesList;
     }
 }

@@ -25,7 +25,7 @@
         <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
             <children>
                 <Button fx:id="newTask" mnemonicParsing="false" onAction="#handleButtonAction" text="+New Task" textFill="#3a831d" />
-                <ComboBox fx:id="catComboBox" prefWidth="150.0" promptText="Filter by Category" />
+                <ComboBox fx:id="catComboBox" onAction="#handleFilterSelect" prefWidth="150.0" promptText="Filter by Category" />
             </children>
         </VBox>
         <Accordion GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -51,7 +51,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane hbarPolicy="NEVER" prefHeight="268.0" prefWidth="453.0">
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="268.0" prefWidth="453.0" vbarPolicy="ALWAYS">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0">
                                  <children>
@@ -83,6 +83,6 @@
                 </TitledPane>
             </panes>
         </Accordion>
-        <TextField promptText="Search Bar" GridPane.columnIndex="1" />
+        <TextField fx:id="searchBar" onAction="#handleSearchBar" promptText="Search Bar" GridPane.columnIndex="1" />
     </children>
 </GridPane>
