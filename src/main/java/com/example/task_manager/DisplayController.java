@@ -68,6 +68,7 @@ public class  DisplayController {
 
             // Event handler for the OK button
             Node okButton = dialogPane.lookupButton(buttonTypeOk);
+            ((javafx.scene.control.Button) okButton).setText("Save Task");
             okButton.addEventFilter(ActionEvent.ACTION, e -> {
                 // Call the saveTask method from AddTaskController
                 //System.out.println(this);
