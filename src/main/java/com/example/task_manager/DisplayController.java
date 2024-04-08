@@ -146,67 +146,57 @@ public class  DisplayController {
     }
 
     private void populateDisplay(){
-        //implement database stuff
+    //implement database stuff
 
-        vBox1.getChildren().clear();
-        vBox2.getChildren().clear();
-        vBox3.getChildren().clear();
+    vBox1.getChildren().clear();
+    vBox2.getChildren().clear();
+    vBox3.getChildren().clear();
 
-        //try {
+    ArrayList<Task> tasks = display.getTaskList();
 
-        //change this to work with database
-        //ArrayList<Task> tasks = dbClient.getAllTasks(); // Fetch tasks from the database
+    String categoryFilter = catComboBox.getValue();
+    String searchFilter = searchBar.getText().toLowerCase();
 
-        ArrayList<Task> tasks = display.getTaskList();
-
-        String categoryFilter = catComboBox.getValue();
-        String searchFilter = searchBar.getText().toLowerCase();
-
-        // Populate the display with fetched tasks
-        for (Task t : tasks){
-            if (!(categoryFilter == null || categoryFilter.equals("No Category Filter") )){
-                if (t.getCategory().getName().equals(catComboBox.getValue())){
-                    if (searchFilter.equals("")){
-                        //category filter has category selected and search bar has no text
-                        displayTask(t);
-                    } else {
-                        ////category filter has category selected and search bar has text
-                        if (t.getName().toLowerCase().startsWith(searchFilter)){
-                            displayTask(t);
-                        }
-                    }
-                }
-            } else {
-                //category filter either has "No Category Filter" selected or is on the default text field
+    // Populate the display with fetched tasks
+    for (Task t : tasks){
+        if (!(categoryFilter == null || categoryFilter.equals("No Category Filter") )){
+            if (t.getCategory().getName().equals(catComboBox.getValue())){
                 if (searchFilter.equals("")){
-                    //category filter either has "No Category Filter" selected or is on the default text field and search bar is no text
+                    //category filter has category selected and search bar has no text
                     displayTask(t);
                 } else {
-                    //category filter either has "No Category Filter" selected or is on the default text field and search bar has text
+                    ////category filter has category selected and search bar has text
                     if (t.getName().toLowerCase().startsWith(searchFilter)){
                         displayTask(t);
                     }
                 }
             }
-        }
-
-        //for displaying message when search bar or category makes priority have no tasks that match the filters
-        for (VBox vBox : vBoxes){
-            if (vBox.getChildren().isEmpty() && !display.getTaskList().isEmpty()){
-                Label label = new Label("There are no tasks that satisfy the current filters.");
-                label.setStyle("-fx-text-fill: Red");
-                vBox.getChildren().add(label);
-                vBox.setAlignment(Pos.CENTER);
+        } else {
+            //category filter either has "No Category Filter" selected or is on the default text field
+            if (searchFilter.equals("")){
+                //category filter either has "No Category Filter" selected or is on the default text field and search bar is no text
+                displayTask(t);
             } else {
-                vBox.setAlignment(Pos.TOP_LEFT);
+                //category filter either has "No Category Filter" selected or is on the default text field and search bar has text
+                if (t.getName().toLowerCase().startsWith(searchFilter)){
+                    displayTask(t);
+                }
             }
         }
-
-//        } catch (SQLException e) {
-//            System.out.println("Error fetching tasks from the database: " + e.getMessage());
-//            e.printStackTrace();
-//        }
     }
+
+    //for displaying message when search bar or category makes priority have no tasks that match the filters
+    for (VBox vBox : vBoxes){
+        if (vBox.getChildren().isEmpty() && !display.getTaskList().isEmpty()){
+            Label label = new Label("There are no tasks that satisfy the current filters.");
+            label.setStyle("-fx-text-fill: Red");
+            vBox.getChildren().add(label);
+            vBox.setAlignment(Pos.CENTER);
+        } else {
+            vBox.setAlignment(Pos.TOP_LEFT);
+        }
+    }
+}
 
     private void displayTask(Task t){
         int priority = t.getPriorityLevel();
