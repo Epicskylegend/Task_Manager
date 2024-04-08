@@ -14,6 +14,7 @@ import java.io.IOException;
 public class TaskButton extends Button {
     Task task;
     HBox buttonContents;
+    Display display;
 
     public TaskButton(Task t){
         super("");
@@ -36,6 +37,9 @@ public class TaskButton extends Button {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Task_Display.fxml"));
                 BorderPane root1 = fxmlLoader.load();
+
+                TaskDisplayController controller = new TaskDisplayController(task, display);
+                fxmlLoader.setController(controller);
 
                 // Create a new stage for the dialog window
                 Stage dialogStage = new Stage();
