@@ -3,20 +3,25 @@ package com.example.task_manager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.Parent;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class  DisplayController {
 
+    Display display;
     DatabaseClient dbClient = new DatabaseClient();
     private Display display;
+
 
     @FXML
     private ComboBox<String> catComboBox;
@@ -43,6 +48,8 @@ public class  DisplayController {
 
     @FXML
     VBox vBox3;
+
+    ArrayList<VBox> vBoxes = new ArrayList<>();
 
     @FXML
     void handleButtonAction(ActionEvent event) {
@@ -111,26 +118,13 @@ public class  DisplayController {
             this.searchBar.setText(newValue);
             handleSearchBar();
         }));
-        catComboBox.getItems().removeAll(catComboBox.getItems());
-        catComboBox.getItems().addAll("None", "School", "Spare Time", "Fitness");
 
-        catComboBox.getItems().addAll(display.getCategories());
-        populateDisplay();
-    }
+        vBoxes.addAll(Arrays.asList(vBox1, vBox2, vBox3));
 
-    private void populateDisplay(){
-        //implement database stuff
-
-        vBox1.getChildren().clear();
-        vBox2.getChildren().clear();
-        vBox3.getChildren().clear();
-
-        //try {
-
-            display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-            display.addTask(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
-            display.addTask(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
-            display.addTask(new Task("Color Test", "", "Color Test", "#4d3399", 1));
+        display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+        display.addTask(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
+        display.addTask(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
+        display.addTask(new Task("Color Test", "", "Color Test", "#4d3399", 1));
 
 //            for (int i = 0; i < 20; i++) {
 //                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
@@ -142,6 +136,55 @@ public class  DisplayController {
 //                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
 //            }
 
+        catComboBox.getItems().removeAll(catComboBox.getItems());
+//        catComboBox.getItems().addAll("No Category Filter", "School", "Spare Time", "Fitness");
+        catComboBox.getItems().add("No Category Filter");
+
+        catComboBox.getItems().addAll(display.getCategories());
+
+        populateDisplay();
+    }
+
+    private void populateDisplay(){
+        //implement database stuff
+
+        vBox1.getChildren().clear();
+        vBox2.getChildren().clear();
+        vBox3.getChildren().clear();
+
+        ArrayList<Task> databaseTasks = new ArrayList<>();
+        databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+        databaseTasks.add(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
+        databaseTasks.add(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
+        databaseTasks.add(new Task("Color Test", "", "Color Test", "#4d3399", 1));
+
+        for (int i = 0; i < 20; i++) {
+            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
+        }
+        for (int i = 0; i < 20; i++) {
+            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
+        }
+        for (int i = 0; i < 20; i++) {
+            databaseTasks.add(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
+        }
+
+        //change this to work with database
+        //ArrayList<Task> databaseTasks = dbClient.getAllTasks(); // Fetch tasks from the database
+
+        String categoryFilter = catComboBox.getValue();
+        String searchFilter = searchBar.getText();
+
+        // Populate the display with fetched tasks
+        for (Task t : databaseTasks){
+            if (!(categoryFilter == null || categoryFilter.equals("None") )){
+                if (t.getCategory().getName().equals(catComboBox.getValue())){
+                    if (searchFilter.equals("")){
+                        //category filter has category selected and search bar has no text
+                        displayTask(t);
+                    } else {
+                        ////category filter has category selected and search bar has text
+        //try {
+
             //change this to work with database
             //ArrayList<Task> tasks = dbClient.getAllTasks(); // Fetch tasks from the database
 
@@ -152,7 +195,7 @@ public class  DisplayController {
 
             // Populate the display with fetched tasks
             for (Task t : tasks){
-                if (!(categoryFilter == null || categoryFilter.equals("None") )){
+                if (!(categoryFilter == null || categoryFilter.equals("No Category Filter") )){
                     if (t.getCategory().getName().equals(catComboBox.getValue())){
                         if (searchFilter.equals("")){
                             //category filter has category selected and search bar has no text
@@ -165,18 +208,43 @@ public class  DisplayController {
                         }
                     }
                 } else {
-                    //category filter either has "None" selected or is on the default text field
+                    //category filter either has "No Category Filter" selected or is on the default text field
                     if (searchFilter.equals("")){
-                        //category filter either has "None" selected or is on the default text field and search bar is no text
+                        //category filter either has "No Category Filter" selected or is on the default text field and search bar is no text
                         displayTask(t);
                     } else {
-                        //category filter either has "None" selected or is on the default text field and search bar has text
+                        //category filter either has "No Category Filter" selected or is on the default text field and search bar has text
                         if (t.getName().toLowerCase().startsWith(searchFilter)){
                             displayTask(t);
                         }
                     }
                 }
+            } else {
+                //category filter either has "None" selected or is on the default text field
+                if (searchFilter.equals("")){
+                    //category filter either has "None" selected or is on the default text field and search bar is no text
+                    displayTask(t);
+                } else {
+                    //category filter either has "None" selected or is on the default text field and search bar has text
+                    if (t.getName().toLowerCase().startsWith(searchFilter)){
+                        displayTask(t);
+                    }
+                }
             }
+        }
+
+            //for displaying message when search bar or category makes priority have no tasks that match the filters
+            for (VBox vBox : vBoxes){
+                if (vBox.getChildren().isEmpty()){
+                    Label label = new Label("There are no tasks that satisfy the current filters.");
+                    label.setStyle("-fx-text-fill: Red");
+                    vBox.getChildren().add(label);
+                    vBox.setAlignment(Pos.CENTER);
+                } else {
+                    vBox.setAlignment(Pos.TOP_LEFT);
+                }
+            }
+
 //        } catch (SQLException e) {
 //            System.out.println("Error fetching tasks from the database: " + e.getMessage());
 //            e.printStackTrace();
