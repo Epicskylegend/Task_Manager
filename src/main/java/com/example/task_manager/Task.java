@@ -2,7 +2,9 @@ package com.example.task_manager;
 
 import java.util.ArrayList;
 
+
 public class Task {
+    private int id;
     private String name;
     private Priority priority;
     private Category category;
@@ -24,6 +26,13 @@ public class Task {
                 this.priority = new Priority(priority, "Blue");
         }
         completionStatus = false;
+    }
+    public void setID(int id) {
+        this.id = id;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public String getName() {
