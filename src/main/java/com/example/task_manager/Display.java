@@ -44,7 +44,40 @@ public class Display {
         for (Task t : taskList){
             if (t == task){
                 taskList.remove(task);
+                //boolean for figuring out if other tasks have the category that the deleted task has
+                boolean hasMoreTasks = false;
+                for (Task t2 : taskList){
+                    if (t2.getCategory().getName().equals(task.getCategory().getName())){
+                        hasMoreTasks = true;
+                        break;
+                    }
+                }
+
+                if (!hasMoreTasks) {
+                    filter.removeFilter(task.getCategory());
+                }
+
                 return true;
+//                try {
+//                    taskList.remove(task);
+//                    dbClient.deleteTask(task);
+//                    //boolean for figuring out if other tasks have the category that the deleted task has
+//                    boolean hasMoreTasks = false;
+//                    for (Task t2 : taskList){
+//                        if (t2.getCategory().getName().equals(task.getCategory().getName())){
+//                            hasMoreTasks = true;
+//                            break;
+//                        }
+//                    }
+//
+//                    if (!hasMoreTasks) {
+//                        filter.removeFilter(task.getCategory());
+//                    }
+//                    return true;
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//                break;
             }
         }
         return false;
