@@ -65,7 +65,7 @@ public class  AddTaskController {
             System.out.println(addCatComboBox.getEditor());
 
             //create task button for main display
-            TaskButton button = new TaskButton(newTask);
+            TaskButton button = new TaskButton(newTask,display, mainDisplayController);
             int priority = button.getTask().getPriorityLevel();
             //assign task to correct vbox
             VBox vbox = mainDisplayController.getVBox(priority);

@@ -1,6 +1,7 @@
 package com.example.task_manager;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -12,13 +13,16 @@ public class  TaskDisplayController {
     private Task task;
     private Display display;
     private Filter filter;
+    DisplayController mainDisplayController;
+    TaskButton taskButton;
     public TaskDisplayController(){
 
     }
-    public TaskDisplayController(Task task, Display display){
+    public TaskDisplayController(Task task, Display display, DisplayController mainDisplayController, TaskButton taskButton){
         this.task = task;
         this.display = display;
-
+        this.mainDisplayController = mainDisplayController;
+        this.taskButton = taskButton;
     }
     @FXML
     private Label taskNameField;
@@ -30,15 +34,17 @@ public class  TaskDisplayController {
     private ComboBox<String> addCatComboBox;
     @FXML
     private ColorPicker myColorPicker;
+    @FXML
+    private Button saveButton;
 
     @FXML
     public void initialize() {
+        populateComboBoxes();
+        System.out.println("hi");
         taskDescriptionField.setWrapText(true);
         priorityComboBox.getItems().removeAll(priorityComboBox.getItems());
-        priorityComboBox.getItems().addAll(1,2,3 );
-        addCatComboBox.getItems().removeAll(addCatComboBox.getItems());
-        addCatComboBox.getItems().addAll("School", "Music", "Work");
-        System.out.println(addCatComboBox.getEditor().getText());
+        priorityComboBox.getItems().addAll(1,2,3);
+
         addCatComboBox.setOnAction(event -> {
             String selectedCategory = addCatComboBox.getValue();
             if (selectedCategory != null && isExistingCategory(selectedCategory)) {
@@ -49,26 +55,23 @@ public class  TaskDisplayController {
                 myColorPicker.setDisable(false);
             }
         });
-
-
         // set values using info from database instead
-        taskNameField.setText("Mr Krabs");
-        priorityComboBox.setValue(2);
-        addCatComboBox.setValue("Work");
-        taskDescriptionField.setText("Why don't I call someone whose job it is to fix it? You know why? Because when I need a job [pokes Squidward's nose] done, I get someone with a job [pokes Squidward's nose again] to do [pokes Squidward's nose for the third time] that job! [pokes Squidward's nose for the fourth time]");
+        taskNameField.setText(task.getName());
+        priorityComboBox.setValue(task.getPriorityLevel());
+        addCatComboBox.setValue(task.getCategory().getName());
+        taskDescriptionField.setText(task.getDescription());
     }
     private boolean isExistingCategory(String enteredText) {
         return addCatComboBox.getItems().contains(enteredText);
     }
-    public void saveTask(Display display, DisplayController mainDisplayController){
+    public void saveTask(Display display){
         String categoryName = addCatComboBox.getValue();
         String categoryColor = hexToCss(changeColor());
-        for (Category c : filter.getFilter()){
-            String catName = c.getName();
-            if (catName.equalsIgnoreCase(categoryName)){
+        for (String c : display.getCategories()){
+            if (c.equalsIgnoreCase(categoryName)){
                 //to match case
-                categoryName = catName;
-                categoryColor = hexToCss(c.getCategoryColor());
+                categoryName = c;
+                //categoryColor = hexToCss(c.getCategoryColor());
                 break;
             }
         }
@@ -77,6 +80,15 @@ public class  TaskDisplayController {
         task.setDescription(taskDescriptionField.getText());
         task.setCategory(taskCategory);
         task.setPriorityLevel(priorityComboBox.getValue());
+    }
+    public void handleDeleteTaskAction(ActionEvent event){
+        // remove from list
+        display.removeTask(task);
+        // remove from display
+        mainDisplayController.getVBox(priorityComboBox.getValue()).getChildren().remove(taskButton);
+        // Close the window
+        Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        stage.close();
     }
     public String hexToCss(String colorCode){
         if (colorCode.startsWith("0x")){
@@ -91,10 +103,22 @@ public class  TaskDisplayController {
         String myColor = myColorPicker.getValue().toString();
         return myColor;
     }
-//    public void setFilter(Filter filter){
-//        this.filter = filter;
-//        addCatComboBox.getItems().clear();
-//        addCatComboBox.getItems().addAll(filter.getCategoryList());
-//    }
+    @FXML
+    private void handleSaveButtonAction(ActionEvent event) {
+        saveTask(display);
+        // Close the window
+        Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+    private void populateComboBoxes(){
+        ArrayList<String> cat = display.getCategories();
+        addCatComboBox.getItems().removeAll(addCatComboBox.getItems());
+        for (String item : cat) {
+            addCatComboBox.getItems().addAll(item);
+
+        }
+        System.out.println("In Taskdisplay: " + this);
+    }
+
     // need method to handle completion
 }
