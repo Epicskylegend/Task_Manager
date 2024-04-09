@@ -13,13 +13,16 @@ public class  TaskDisplayController {
     private Task task;
     private Display display;
     private Filter filter;
+    DisplayController mainDisplayController;
+    TaskButton taskButton;
     public TaskDisplayController(){
 
     }
-    public TaskDisplayController(Task task, Display display){
+    public TaskDisplayController(Task task, Display display, DisplayController mainDisplayController, TaskButton taskButton){
         this.task = task;
         this.display = display;
-
+        this.mainDisplayController = mainDisplayController;
+        this.taskButton = taskButton;
     }
     @FXML
     private Label taskNameField;
@@ -79,7 +82,10 @@ public class  TaskDisplayController {
         task.setPriorityLevel(priorityComboBox.getValue());
     }
     public void handleDeleteTaskAction(ActionEvent event){
+        // remove from list
         display.removeTask(task);
+        // remove from display
+        mainDisplayController.getVBox(priorityComboBox.getValue()).getChildren().remove(taskButton);
         // Close the window
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         stage.close();
@@ -114,10 +120,5 @@ public class  TaskDisplayController {
         System.out.println("In Taskdisplay: " + this);
     }
 
-//    public void setFilter(Filter filter){
-//        this.filter = filter;
-//        addCatComboBox.getItems().clear();
-//        addCatComboBox.getItems().addAll(filter.getCategoryList());
-//    }
     // need method to handle completion
 }

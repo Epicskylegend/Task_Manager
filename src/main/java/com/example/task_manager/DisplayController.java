@@ -186,13 +186,13 @@ public class  DisplayController {
         int priority = t.getPriorityLevel();
         switch (priority){
             case 1:
-                vBox1.getChildren().add(new TaskButton(t, display));
+                vBox1.getChildren().add(new TaskButton(t, display, this));
                 break;
             case 2:
-                vBox2.getChildren().add(new TaskButton(t, display));
+                vBox2.getChildren().add(new TaskButton(t, display, this));
                 break;
             case 3:
-                vBox3.getChildren().add(new TaskButton(t, display));
+                vBox3.getChildren().add(new TaskButton(t, display, this));
                 break;
             default:
                 System.out.println("No priority level for task " + t.getName());

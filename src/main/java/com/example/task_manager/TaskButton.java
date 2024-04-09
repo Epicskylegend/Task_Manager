@@ -15,13 +15,15 @@ public class TaskButton extends Button {
     Task task;
     HBox buttonContents;
     Display display;
+    DisplayController mainDisplayController;
 
-    public TaskButton(Task t, Display display){
+    public TaskButton(Task t, Display display, DisplayController mainDisplayController){
         super("");
         //Double buttonWidth = vBox1.getPrefWidth(); //add logic here to get width of the vbox of correct priority
         super.setPrefWidth(Double.MAX_VALUE); // may need to change this later, unsure, but it does fill to fit currently
         this.task = t;
         this.display = display;
+        this.mainDisplayController = mainDisplayController;
         // spacer created space between left and right side of button for task name and category
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -40,7 +42,7 @@ public class TaskButton extends Button {
 
                 System.out.println("I am here");
                 System.out.println(display.getCategories());
-                TaskDisplayController controller = new TaskDisplayController(task, display);
+                TaskDisplayController controller = new TaskDisplayController(task, display, mainDisplayController, this);
                 System.out.println("in taskbutton: " + controller);
                 fxmlLoader.setController(controller);
                 BorderPane root1 = fxmlLoader.load();
