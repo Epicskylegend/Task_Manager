@@ -24,7 +24,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'com.example.task_manager'
-    mainClass = 'com.example.task_manager.HelloApplication'
+    mainClass = 'com.example.task_manager.DisplayApplication'
 }
 
 javafx {
