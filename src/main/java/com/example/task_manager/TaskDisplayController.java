@@ -1,6 +1,7 @@
 package com.example.task_manager;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -30,15 +31,18 @@ public class  TaskDisplayController {
     private ComboBox<String> addCatComboBox;
     @FXML
     private ColorPicker myColorPicker;
+    @FXML
+    private Button saveButton;
 
     @FXML
     public void initialize() {
+        print();
         taskDescriptionField.setWrapText(true);
-        priorityComboBox.getItems().removeAll(priorityComboBox.getItems());
-        priorityComboBox.getItems().addAll(1,2,3 );
-        addCatComboBox.getItems().removeAll(addCatComboBox.getItems());
-        addCatComboBox.getItems().addAll("School", "Music", "Work");
-        System.out.println(addCatComboBox.getEditor().getText());
+//        priorityComboBox.getItems().removeAll(priorityComboBox.getItems());
+//        priorityComboBox.getItems().addAll(1,2,3 );
+//        addCatComboBox.getItems().removeAll(addCatComboBox.getItems());
+//        addCatComboBox.getItems().addAll("School", "Music", "Work");
+//        System.out.println(addCatComboBox.getEditor().getText());
         addCatComboBox.setOnAction(event -> {
             String selectedCategory = addCatComboBox.getValue();
             if (selectedCategory != null && isExistingCategory(selectedCategory)) {
@@ -52,10 +56,10 @@ public class  TaskDisplayController {
 
 
         // set values using info from database instead
-        taskNameField.setText("Mr Krabs");
-        priorityComboBox.setValue(2);
-        addCatComboBox.setValue("Work");
-        taskDescriptionField.setText("Why don't I call someone whose job it is to fix it? You know why? Because when I need a job [pokes Squidward's nose] done, I get someone with a job [pokes Squidward's nose again] to do [pokes Squidward's nose for the third time] that job! [pokes Squidward's nose for the fourth time]");
+//        taskNameField.setText("Mr Krabs");
+//        priorityComboBox.setValue(2);
+//        addCatComboBox.setValue("Work");
+//        taskDescriptionField.setText("Why don't I call someone whose job it is to fix it? You know why? Because when I need a job [pokes Squidward's nose] done, I get someone with a job [pokes Squidward's nose again] to do [pokes Squidward's nose for the third time] that job! [pokes Squidward's nose for the fourth time]");
     }
     private boolean isExistingCategory(String enteredText) {
         return addCatComboBox.getItems().contains(enteredText);
@@ -91,6 +95,19 @@ public class  TaskDisplayController {
         String myColor = myColorPicker.getValue().toString();
         return myColor;
     }
+    @FXML
+    private void handleSaveButtonAction(ActionEvent event) {
+        // Close the window
+        Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+    private void print(){
+        ArrayList<String> cat = display.getCategories();
+        for (String item : cat) {
+            System.out.println(item);
+        }
+    }
+
 //    public void setFilter(Filter filter){
 //        this.filter = filter;
 //        addCatComboBox.getItems().clear();

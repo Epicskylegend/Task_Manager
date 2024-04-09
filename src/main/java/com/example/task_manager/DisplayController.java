@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class  DisplayController {
 
     DatabaseClient dbClient = new DatabaseClient();
-    private Display display;
+    public Display display = new Display();
 
     @FXML
     private ComboBox<String> catComboBox;
@@ -104,7 +104,6 @@ public class  DisplayController {
 
     @FXML
     public void initialize() {
-        this.display = new Display();
         //adds event listener to search bar to call event when text bar is updated for each change of letter
         searchBar.textProperty().addListener(((observable, oldValue, newValue) -> {
             display.setSearchBarText(newValue);
@@ -187,13 +186,13 @@ public class  DisplayController {
         int priority = t.getPriorityLevel();
         switch (priority){
             case 1:
-                vBox1.getChildren().add(new TaskButton(t));
+                vBox1.getChildren().add(new TaskButton(t, display));
                 break;
             case 2:
-                vBox2.getChildren().add(new TaskButton(t));
+                vBox2.getChildren().add(new TaskButton(t, display));
                 break;
             case 3:
-                vBox3.getChildren().add(new TaskButton(t));
+                vBox3.getChildren().add(new TaskButton(t, display));
                 break;
             default:
                 System.out.println("No priority level for task " + t.getName());

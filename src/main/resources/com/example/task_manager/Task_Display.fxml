@@ -58,7 +58,7 @@
             <TextArea fx:id="taskDescriptionField" prefHeight="200.0" prefWidth="200.0" />
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />
+                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Save" />
                   <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" />
                </children>
             </HBox>
