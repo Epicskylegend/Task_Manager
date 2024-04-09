@@ -37,10 +37,13 @@ public class TaskButton extends Button {
         this.setOnAction(actionEvent -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Task_Display.fxml"));
-                BorderPane root1 = fxmlLoader.load();
 
+                System.out.println("I am here");
+                System.out.println(display.getCategories());
                 TaskDisplayController controller = new TaskDisplayController(task, display);
+                System.out.println("in taskbutton: " + controller);
                 fxmlLoader.setController(controller);
+                BorderPane root1 = fxmlLoader.load();
 
                 // Create a new stage for the dialog window
                 Stage dialogStage = new Stage();
