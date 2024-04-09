@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabaseClient {
-    private final String URL = "jdbc:postgresql://0.0.0.0:5432/Task_Manager";
+    private final String URL = "jdbc:postgresql://localhost:5432/Task_Manager";
     private final String USERNAME = "user1";
     private final String PASSWORD = "1234";
 
