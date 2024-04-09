@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - '54321:5432'
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=user1
+      - POSTGRES_DB=Task_Manager
+
+
+  database-setup:
+      build:
+        context: ./src/main/docker_database/
+      command: bash -c "sleep 5; /usr/local/bin/DatabaseSetup.sh"
+      depends_on:
+          - postgres
+      links:
+          - postgres
+      environment:
+        - POSTGRES_PASSWORD=1234
+        - POSTGRES_USER=user1
+        - POSTGRES_DB=Task_Manager
+        - POSTGRES_HOST=postgres
+        - POSTGRES_PORT=5432
+
+      restart: on-failure:2
