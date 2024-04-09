@@ -15,7 +15,16 @@ public class Display {
         this.search = new Search();
         this.filter = new Filter();
         this.taskList = new ArrayList<>();
+
+        try {
+            updateTaskList(dbClient.getAllTasks());
+        } catch (SQLException e) {
+            // Handle SQLException
+            e.printStackTrace();
+        }
     }
+
+
 
     //updates view of display
     public void updateView(){
@@ -31,9 +40,9 @@ public class Display {
     public void addTask(Task task) {
         try {
             taskList.add(task);
-            //dbClient.createTask(task); // Add task to the database
+            dbClient.createTask(task); // Add task to the database
             addCategory(task.getCategory());
-        } catch (/*SQLException | */DuplicateCategoryException e) {
+        } catch (SQLException | DuplicateCategoryException e) {
             System.out.println("Error adding task to the database: " + e.getMessage());
             e.printStackTrace();
 
@@ -55,7 +64,7 @@ public class Display {
     }
 
     public void updateTaskList(ArrayList<Task> taskList){
-        this.taskList = taskList;
+        this.taskList = taskList; // Use this for adding tasks from db into application. Think about adding this to constuctor
     }
 
     public ArrayList<String> getCategories(){
