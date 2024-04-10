@@ -1,0 +1,2 @@
+# Ensures that .sh file will have the correct eol for linux
+*.sh text eol=lf

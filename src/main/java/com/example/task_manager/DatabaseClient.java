@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabaseClient {
-    private final String URL = "jdbc:postgresql://0.0.0.0:5432/Task_Manager";
+    private final String URL = "jdbc:postgresql://localhost:54321/Task_Manager";
     private final String USERNAME = "user1";
     private final String PASSWORD = "1234";
 
@@ -32,6 +32,7 @@ public class DatabaseClient {
         } else {
             throw new SQLException("Failed to get generated task ID.");
         }
+        connection.commit();
 
         generatedKeys.close();
         st.close();
@@ -58,6 +59,8 @@ public class DatabaseClient {
 
         categorySt.executeUpdate();
         categorySt.close();
+
+        connection.commit();
 
         connection.close();
     }

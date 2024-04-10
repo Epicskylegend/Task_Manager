@@ -3,20 +3,24 @@ package com.example.task_manager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.Parent;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class  DisplayController {
 
     DatabaseClient dbClient = new DatabaseClient();
     public Display display = new Display();
+
 
     @FXML
     private ComboBox<String> catComboBox;
@@ -44,6 +48,8 @@ public class  DisplayController {
     @FXML
     VBox vBox3;
 
+    ArrayList<VBox> vBoxes = new ArrayList<>();
+
     @FXML
     void handleButtonAction(ActionEvent event) {
         try {
@@ -62,6 +68,7 @@ public class  DisplayController {
 
             // Event handler for the OK button
             Node okButton = dialogPane.lookupButton(buttonTypeOk);
+            ((javafx.scene.control.Button) okButton).setText("Save Task");
             okButton.addEventFilter(ActionEvent.ACTION, e -> {
                 // Call the saveTask method from AddTaskController
                 //System.out.println(this);
@@ -110,10 +117,15 @@ public class  DisplayController {
             this.searchBar.setText(newValue);
             handleSearchBar();
         }));
+
+        vBoxes.addAll(Arrays.asList(vBox1, vBox2, vBox3));
+
         catComboBox.getItems().removeAll(catComboBox.getItems());
-        catComboBox.getItems().addAll("None", "School", "Spare Time", "Fitness");
+//        catComboBox.getItems().addAll("No Category Filter", "School", "Spare Time", "Fitness");
+        catComboBox.getItems().add("No Category Filter");
 
         catComboBox.getItems().addAll(display.getCategories());
+
         populateDisplay();
     }
 
@@ -123,42 +135,55 @@ public class  DisplayController {
         vBox1.getChildren().clear();
         vBox2.getChildren().clear();
         vBox3.getChildren().clear();
+
             ArrayList<Task> tasks = display.getTaskList();
 
-            String categoryFilter = catComboBox.getValue();
-            String searchFilter = searchBar.getText().toLowerCase();
 
-            // Populate the display with fetched tasks
-            for (Task t : tasks){
-                if (!(categoryFilter == null || categoryFilter.equals("None") )){
-                    if (t.getCategory().getName().equals(catComboBox.getValue())){
-                        if (searchFilter.equals("")){
-                            //category filter has category selected and search bar has no text
-                            displayTask(t);
-                        } else {
-                            ////category filter has category selected and search bar has text
-                            if (t.getName().toLowerCase().startsWith(searchFilter)){
-                                displayTask(t);
-                            }
-                        }
-                    }
-                } else {
-                    //category filter either has "None" selected or is on the default text field
+        ArrayList<Task> tasks = display.getTaskList();
+
+        String categoryFilter = catComboBox.getValue();
+        String searchFilter = searchBar.getText().toLowerCase();
+
+        // Populate the display with fetched tasks
+        for (Task t : tasks){
+            if (!(categoryFilter == null || categoryFilter.equals("No Category Filter") )){
+                if (t.getCategory().getName().equals(catComboBox.getValue())){
                     if (searchFilter.equals("")){
-                        //category filter either has "None" selected or is on the default text field and search bar is no text
+                        //category filter has category selected and search bar has no text
                         displayTask(t);
                     } else {
-                        //category filter either has "None" selected or is on the default text field and search bar has text
+                        ////category filter has category selected and search bar has text
                         if (t.getName().toLowerCase().startsWith(searchFilter)){
                             displayTask(t);
                         }
                     }
                 }
+            } else {
+                //category filter either has "No Category Filter" selected or is on the default text field
+                if (searchFilter.equals("")){
+                    //category filter either has "No Category Filter" selected or is on the default text field and search bar is no text
+                    displayTask(t);
+                } else {
+                    //category filter either has "No Category Filter" selected or is on the default text field and search bar has text
+                    if (t.getName().toLowerCase().startsWith(searchFilter)){
+                        displayTask(t);
+                    }
+                }
             }
-//        } catch (SQLException e) {
-//            System.out.println("Error fetching tasks from the database: " + e.getMessage());
-//            e.printStackTrace();
-//        }
+        }
+
+        //for displaying message when search bar or category makes priority have no tasks that match the filters
+        for (VBox vBox : vBoxes){
+            if (vBox.getChildren().isEmpty() && !searchBar.getText().equals("")){
+                Label label = new Label("There are no tasks that satisfy the current filters.");
+                label.setStyle("-fx-text-fill: Red");
+                vBox.getChildren().add(label);
+                vBox.setAlignment(Pos.CENTER);
+            } else {
+                vBox.setAlignment(Pos.TOP_LEFT);
+            }
+        }
+
     }
 
     public void displayTask(Task t){

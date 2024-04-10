@@ -24,7 +24,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'com.example.task_manager'
-    mainClass = 'com.example.task_manager.HelloApplication'
+    mainClass = 'com.example.task_manager.DisplayApplication'
 }
 
 javafx {
@@ -33,6 +33,10 @@ javafx {
 }
 
 dependencies {
+    // Add PostgreSQL JDBC driver dependency
+    implementation 'org.postgresql:postgresql:42.2.24'
+
+    // Other dependencies
     implementation('com.dlsc.formsfx:formsfx-core:11.3.2') {
         exclude(group: 'org.openjfx')
     }
@@ -44,4 +48,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+// Task to run before application starts to load the JDBC driver
+tasks.named('run', JavaExec) {
+    doFirst {
+        // Load the PostgreSQL JDBC driver
+        Class.forName("org.postgresql.Driver")
+    }
 }
