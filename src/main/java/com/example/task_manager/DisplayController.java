@@ -136,9 +136,6 @@ public class  DisplayController {
         vBox2.getChildren().clear();
         vBox3.getChildren().clear();
 
-            ArrayList<Task> tasks = display.getTaskList();
-
-
         ArrayList<Task> tasks = display.getTaskList();
 
         String categoryFilter = catComboBox.getValue();
