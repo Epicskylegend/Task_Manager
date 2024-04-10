@@ -13,7 +13,7 @@
 ## Testing Functional Requirements
 ## 1. Saving data to database: 
 
-When you open up the application and click on "New Task, you will be prompted with a new window to enter in a task name, description, category, category color and priority level. Once you fill out that information and click save it will save the data to the database. 
+When you open up the application and click on "New Task, you will be prompted with a new window to enter in a task name, description, category, category color, and priority level. Once you fill out that information and click save it will save the data to the database. 
 
 ## 2. Loading data from database: 
 
@@ -29,7 +29,7 @@ Each of the tasks in the application will be put into one of the 3 priority leve
 
 ## 5. Allowing user to sort task by category: 
 
-When click on the "Filter by Category" section on the left side of the application you will see a list of categories which you can click on to see tasks within those categories. 
+When click on the "Filter by Category" section on the left side of the application you will see a list of categories which you can click on to see tasks within those categories as long as you have clicked on priority level the task is in.  
 
 ## 6. Allow user to categorize tasks as complete: 
 
@@ -40,6 +40,6 @@ If you click on a task, in the top right corner of the window you will see a che
 ## Testing Non-Functional Requirements
 
 ### 1. Reusability: Since this application can store a ton of tasks with different ways to filter them, it can be used for a long time to store many tasks.
-### 2. Reusability:
+### 2. Deployment: Starting up the application is made very simple. Once you have the folder, all you need to do is enter "docker compose up --build" in the root directory to build the containers and then run the "DisplayApplication" File. 
 ### 3. Data Persistence: With this application, since it's stored your data in a permanent database, it means that this application can be used over and over again.
 ### 4. Response Time: This application isn't super heavy and the amount of calls made to the database are limited ensuring that it's responsive. 
