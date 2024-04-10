@@ -60,15 +60,14 @@ public class  AddTaskController {
         try {
             display.addTask(newTask);
 
-            //save task to database
-
-
             //create task button for main display
             TaskButton button = new TaskButton(newTask,display, mainDisplayController);
             int priority = button.getTask().getPriorityLevel();
             //assign task to correct vbox
-            VBox vbox = mainDisplayController.getVBox(priority);
-            vbox.getChildren().add(button);
+//            VBox vbox = mainDisplayController.getVBox(priority);
+//            vbox.getChildren().add(button);
+            mainDisplayController.populateDisplay();
+            mainDisplayController.setFilter();
 
         } catch(Exception e) {
             System.out.println(e.getMessage());

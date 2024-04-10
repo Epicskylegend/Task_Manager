@@ -113,6 +113,9 @@ public class  TaskDisplayController {
         display.removeTask(task);
         // remove from display
         System.out.println("Delete task: " + mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().remove(taskButton));
+
+        mainDisplayController.populateDisplay();
+        mainDisplayController.setFilter();
         // Close the window
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         stage.close();

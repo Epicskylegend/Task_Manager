@@ -13,6 +13,8 @@ public class Filter {
 
     public void addFilter(Category category) throws DuplicateCategoryException{
 
+        System.out.println("Attempting to add category: " + category.getName());
+
         for (Category c : categoryList){
             if (category.getName().equals(c.getName())){
                 throw new DuplicateCategoryException("Attempted to create a new category that already exists.");
@@ -24,7 +26,7 @@ public class Filter {
 
     public boolean removeFilter(Category category){
         for (Category c : categoryList){
-            if (category.getName().equals(c.getName())){
+            if (category.getName().equalsIgnoreCase(c.getName())){
                 categoryList.remove(c);
                 return true;
             }

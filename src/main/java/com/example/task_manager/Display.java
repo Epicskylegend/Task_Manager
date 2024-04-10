@@ -56,12 +56,16 @@ public class Display {
     public void addTask(Task task) {
         try {
             taskList.add(task);
-            dbClient.createTask(task); // Add task to the database
             addCategory(task.getCategory());
-        } catch (SQLException | DuplicateCategoryException e) {
+        } catch (DuplicateCategoryException e){
+            e.printStackTrace();
+        }
+
+        try {
+            dbClient.createTask(task); // Add task to the database
+        } catch (SQLException e){
             System.out.println("Error adding task to the database: " + e.getMessage());
             e.printStackTrace();
-
         }
     }
 
@@ -74,6 +78,13 @@ public class Display {
                 } catch (SQLException e) {
                     System.out.println("Error deleting task from the database: " + e.getMessage());
                     e.printStackTrace();
+                }
+                Category c = t.getCategory();
+                for (Category filterCat : filter.getFilter()){
+                    if (filterCat.getName().equalsIgnoreCase(c.getName())){
+                        filter.removeFilter(c);
+                        break;
+                    }
                 }
                 return true;
             }
