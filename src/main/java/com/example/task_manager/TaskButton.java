@@ -35,6 +35,11 @@ public class TaskButton extends Button {
         this.buttonContents.setAlignment(Pos.BOTTOM_LEFT); // this is the line that causes problems
         super.setGraphic(this.buttonContents);
 
+        if (task.getCompletionStatus()){
+            super.setStyle("-fx-background-color: #38BB26");
+        } else{
+            super.setStyle(null);
+        }
         // Creates new window for task
         this.setOnAction(actionEvent -> {
             try {
@@ -60,6 +65,9 @@ public class TaskButton extends Button {
                 e.printStackTrace();
             }
         });
+    }
+    public void setContent(String name, String category, String catColor){
+
     }
 
     public Task getTask() {

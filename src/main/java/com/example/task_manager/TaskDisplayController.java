@@ -3,7 +3,9 @@ package com.example.task_manager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -36,11 +38,14 @@ public class  TaskDisplayController {
     private ColorPicker myColorPicker;
     @FXML
     private Button saveButton;
+    @FXML
+    private CheckBox completeTask;
 
     @FXML
     public void initialize() {
+//        int removedIndex = mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().indexOf(taskButton);
+//        System.out.println("Initialize: " + mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().remove(removedIndex));
         populateComboBoxes();
-        System.out.println("hi");
         taskDescriptionField.setWrapText(true);
         priorityComboBox.getItems().removeAll(priorityComboBox.getItems());
         priorityComboBox.getItems().addAll(1,2,3);
@@ -65,6 +70,7 @@ public class  TaskDisplayController {
         return addCatComboBox.getItems().contains(enteredText);
     }
     public void saveTask(Display display){
+
         String categoryName = addCatComboBox.getValue();
         String categoryColor = hexToCss(changeColor());
         for (String c : display.getCategories()){
@@ -75,17 +81,37 @@ public class  TaskDisplayController {
                 break;
             }
         }
+        task.setCompletionStatus(completeTask.isSelected());
         Category taskCategory = new Category(categoryName,categoryColor);
         task.setName(taskNameField.getText());
         task.setDescription(taskDescriptionField.getText());
         task.setCategory(taskCategory);
         task.setPriorityLevel(priorityComboBox.getValue());
+        display.editTask(task);
+    }
+    @FXML
+    private void handleSaveButtonAction(ActionEvent event) {
+        saveTask(display);
+        mainDisplayController.populateDisplay();
+//        task.setCompletionStatus(true);
+
+        //int removedIndex = mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().indexOf(taskButton);
+//        mainDisplayController.getVBox(priorityComboBox.getValue()).getChildren().add(taskButton);
+//        System.out.println("before");
+//        //mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().remove(removedIndex);
+//        System.out.println("after");
+
+
+
+        // Close the window
+        Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        stage.close();
     }
     public void handleDeleteTaskAction(ActionEvent event){
         // remove from list
         display.removeTask(task);
         // remove from display
-        mainDisplayController.getVBox(priorityComboBox.getValue()).getChildren().remove(taskButton);
+        System.out.println("Delete task: " + mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().remove(taskButton));
         // Close the window
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         stage.close();
@@ -103,13 +129,6 @@ public class  TaskDisplayController {
         String myColor = myColorPicker.getValue().toString();
         return myColor;
     }
-    @FXML
-    private void handleSaveButtonAction(ActionEvent event) {
-        saveTask(display);
-        // Close the window
-        Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        stage.close();
-    }
     private void populateComboBoxes(){
         ArrayList<String> cat = display.getCategories();
         addCatComboBox.getItems().removeAll(addCatComboBox.getItems());
@@ -121,4 +140,5 @@ public class  TaskDisplayController {
     }
 
     // need method to handle completion
+
 }

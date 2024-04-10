@@ -51,16 +51,6 @@ public class Task {
         this.description = description;
     }
 
-    public Task editName(String name){
-        this.name = name;
-        return this;
-    }
-
-    public Task editDescription(String description){
-        this.description = description;
-        return this;
-    }
-
     public void setCategory(Category category){
         this.category = category;
     }
