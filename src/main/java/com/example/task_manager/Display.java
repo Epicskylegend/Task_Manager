@@ -70,6 +70,12 @@ public class Display {
     }
     public void editTask(Task task){
 
+        try {
+            dbClient.editTask(task);
+        } catch (SQLException e) {
+            System.out.println("Error editing task in the database: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void updateTaskList(ArrayList<Task> taskList){
