@@ -10,3 +10,10 @@
 
 ### To run this application you need to run the file called "DisplayApplication" inside the com.example.task_manager package.
 
+## Testing Functional Requirements
+## 1. Saving data to database: When you open up the application
+## 2. Loading data from database:
+## 3. Displaying tasks to user:
+## 4. Allow users to sort task by priority:
+## 5. Allowing user to sort task by category:
+## 6. Allow user to categorize tasks as complete:
