@@ -15,5 +15,5 @@
 ## 2. Loading data from database: After doing the above information, you can restart the application and you'll find that the tasks you created are still there because it's being loaded from the database.
 ## 3. Displaying tasks to user: When you open up the application and click on one of the 3 priority levels you will see the tasks displayed there. You can also click on these tasks to get more detailed information. 
 ## 4. Allow users to sort task by priority: Each of the tasks in the application will be put into one of the 3 priority levels which you can click on to show or hide tasks.
-## 5. Allowing user to sort task by category:
-## 6. Allow user to categorize tasks as complete:
+## 5. Allowing user to sort task by category: When click on the "Filter by Category" section on the left side of the application you will see a list of categories which you can click on to see tasks within those categories. 
+## 6. Allow user to categorize tasks as complete: If you click on a task, in the top right corner of the window you will see a checkbox that says "completed." Once you click on that the task will be highlighted green signlaing that it's complete. 
