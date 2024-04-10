@@ -120,21 +120,6 @@ public class  DisplayController {
 
         vBoxes.addAll(Arrays.asList(vBox1, vBox2, vBox3));
 
-//        display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-//        display.addTask(new Task("Exercise", "Jog outside", "Fitness", "Orange", 2));
-//        display.addTask(new Task("Call friend", "Call my friend, I haven't called him in a while", "Spare Time", "Purple", 3));
-//        display.addTask(new Task("Color Test", "", "Color Test", "#4d3399", 1));
-
-//            for (int i = 0; i < 20; i++) {
-//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 1));
-//            }
-//            for (int i = 0; i < 20; i++) {
-//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 2));
-//            }
-//            for (int i = 0; i < 20; i++) {
-//                display.addTask(new Task("Homework 15", "Study and do homework", "School", "Blue", 3));
-//            }
-
         catComboBox.getItems().removeAll(catComboBox.getItems());
 //        catComboBox.getItems().addAll("No Category Filter", "School", "Spare Time", "Fitness");
         catComboBox.getItems().add("No Category Filter");
@@ -144,17 +129,15 @@ public class  DisplayController {
         populateDisplay();
     }
 
-    private void populateDisplay(){
+    public void populateDisplay(){
         //implement database stuff
 
         vBox1.getChildren().clear();
         vBox2.getChildren().clear();
         vBox3.getChildren().clear();
 
-        //try {
+            ArrayList<Task> tasks = display.getTaskList();
 
-        //change this to work with database
-        //ArrayList<Task> tasks = dbClient.getAllTasks(); // Fetch tasks from the database
 
         ArrayList<Task> tasks = display.getTaskList();
 
@@ -201,13 +184,9 @@ public class  DisplayController {
             }
         }
 
-//        } catch (SQLException e) {
-//            System.out.println("Error fetching tasks from the database: " + e.getMessage());
-//            e.printStackTrace();
-//        }
     }
 
-    private void displayTask(Task t){
+    public void displayTask(Task t){
         int priority = t.getPriorityLevel();
         switch (priority){
             case 1:
