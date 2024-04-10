@@ -15,7 +15,16 @@ public class Display {
         this.search = new Search();
         this.filter = new Filter();
         this.taskList = new ArrayList<>();
+
+        try {
+            updateTaskList(dbClient.getAllTasks());
+        } catch (SQLException e) {
+            // Handle SQLException
+            e.printStackTrace();
+        }
     }
+
+
 
     //updates view of display
     public void updateView(){
@@ -28,12 +37,15 @@ public class Display {
     }
 
     //adds task to taskList if it does not already exist and returns true or false if there already exists task in taskList
-    public void addTask(Task task){
-        taskList.add(task);
+    public void addTask(Task task) {
         try {
+            taskList.add(task);
+            dbClient.createTask(task); // Add task to the database
             addCategory(task.getCategory());
-        } catch (DuplicateCategoryException e) {
-            //do nothing
+        } catch (SQLException | DuplicateCategoryException e) {
+            System.out.println("Error adding task to the database: " + e.getMessage());
+            e.printStackTrace();
+
         }
     }
 
@@ -41,40 +53,13 @@ public class Display {
         for (Task t : taskList){
             if (t == task){
                 taskList.remove(task);
-                //boolean for figuring out if other tasks have the category that the deleted task has
-                boolean hasMoreTasks = false;
-                for (Task t2 : taskList){
-                    if (t2.getCategory().getName().equals(task.getCategory().getName())){
-                        hasMoreTasks = true;
-                        break;
-                    }
+                try {
+                    dbClient.deleteTask(task); // Remove task from the database
+                } catch (SQLException e) {
+                    System.out.println("Error deleting task from the database: " + e.getMessage());
+                    e.printStackTrace();
                 }
-
-                if (!hasMoreTasks) {
-                    filter.removeFilter(task.getCategory());
-                }
-
                 return true;
-//                try {
-//                    taskList.remove(task);
-//                    dbClient.deleteTask(task);
-//                    //boolean for figuring out if other tasks have the category that the deleted task has
-//                    boolean hasMoreTasks = false;
-//                    for (Task t2 : taskList){
-//                        if (t2.getCategory().getName().equals(task.getCategory().getName())){
-//                            hasMoreTasks = true;
-//                            break;
-//                        }
-//                    }
-//
-//                    if (!hasMoreTasks) {
-//                        filter.removeFilter(task.getCategory());
-//                    }
-//                    return true;
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//                break;
             }
         }
         return false;
@@ -88,7 +73,7 @@ public class Display {
     }
 
     public void updateTaskList(ArrayList<Task> taskList){
-        this.taskList = taskList;
+        this.taskList = taskList; // Use this for adding tasks from db into application. Think about adding this to constuctor
     }
 
     public ArrayList<String> getCategories(){
