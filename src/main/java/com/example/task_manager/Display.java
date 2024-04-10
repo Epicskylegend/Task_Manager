@@ -83,6 +83,9 @@ public class Display {
     public ArrayList<Task> getTaskList(){
         return this.taskList;
     }
+    public void editTask(Task task){
+
+    }
 
     public void updateTaskList(ArrayList<Task> taskList){
         this.taskList = taskList;
