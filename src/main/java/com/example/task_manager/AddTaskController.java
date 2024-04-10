@@ -62,7 +62,6 @@ public class  AddTaskController {
 
             //save task to database
 
-            System.out.println(addCatComboBox.getEditor());
 
             //create task button for main display
             TaskButton button = new TaskButton(newTask,display, mainDisplayController);
@@ -93,7 +92,7 @@ public class  AddTaskController {
 
     public void setFilter(Filter filter){
         this.filter = filter;
-        addCatComboBox.getItems().clear();
+        addCatComboBox.getItems().removeAll();
         addCatComboBox.getItems().addAll(filter.getCategoryList());
     }
     @FXML

@@ -1,5 +1,6 @@
 package com.example.task_manager;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,9 +19,9 @@ import java.util.Arrays;
 
 public class  DisplayController {
 
-    DatabaseClient dbClient = new DatabaseClient();
     public Display display = new Display();
 
+    int counter;
 
     @FXML
     private ComboBox<String> catComboBox;
@@ -86,12 +87,13 @@ public class  DisplayController {
     @FXML
     void handleFilterSelect(ActionEvent event) {
         populateDisplay();
-        //System.out.println("Search Bar: " + searchBar.getText());
+        System.out.println("Filter selected!");
     }
 
     @FXML
     void handleSearchBar(){
         populateDisplay();
+        setFilter();
         //System.out.println(searchBar.getText());
     }
 
@@ -120,17 +122,13 @@ public class  DisplayController {
 
         vBoxes.addAll(Arrays.asList(vBox1, vBox2, vBox3));
 
-        catComboBox.getItems().removeAll(catComboBox.getItems());
-//        catComboBox.getItems().addAll("No Category Filter", "School", "Spare Time", "Fitness");
-        catComboBox.getItems().add("No Category Filter");
-
-        catComboBox.getItems().addAll(display.getCategories());
-
         populateDisplay();
+        setFilter();
     }
 
     public void populateDisplay(){
-        //implement database stuff
+//        System.out.println("I'm Filtering. Counter = " + counter);
+//        counter++;
 
         vBox1.getChildren().clear();
         vBox2.getChildren().clear();
@@ -198,5 +196,11 @@ public class  DisplayController {
             default:
                 System.out.println("No priority level for task " + t.getName());
         }
+    }
+
+    public void setFilter(){
+        catComboBox.getItems().clear();
+        catComboBox.getItems().add("No Category Filter");
+        catComboBox.getItems().addAll(display.getCategories());
     }
 }

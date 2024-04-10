@@ -22,6 +22,22 @@ public class Display {
             // Handle SQLException
             e.printStackTrace();
         }
+
+        ArrayList<Category> catList = filter.getFilter();
+
+        for (Task t : taskList){
+            Category c = t.getCategory();
+            boolean existsInList = false;
+            for (Category c1 : catList){
+                if (c.getName().equalsIgnoreCase(c1.getName())){
+                    existsInList = true;
+                    break;
+                }
+            }
+            if (!existsInList){
+                catList.add(t.getCategory());
+            }
+        }
     }
 
 

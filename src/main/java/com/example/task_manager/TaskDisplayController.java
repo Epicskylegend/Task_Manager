@@ -93,6 +93,7 @@ public class  TaskDisplayController {
     private void handleSaveButtonAction(ActionEvent event) {
         saveTask(display);
         mainDisplayController.populateDisplay();
+        mainDisplayController.setFilter(); // might remove later
 //        task.setCompletionStatus(true);
 
         //int removedIndex = mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().indexOf(taskButton);
