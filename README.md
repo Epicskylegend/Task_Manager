@@ -34,3 +34,12 @@ When click on the "Filter by Category" section on the left side of the applicati
 ## 6. Allow user to categorize tasks as complete: 
 
 If you click on a task, in the top right corner of the window you will see a checkbox that says "completed." Once you click on that the task will be highlighted green signlaing that it's complete. 
+
+
+
+## Testing Non-Functional Requirements
+
+### 1. Reusability: Since this application can store a ton of tasks with different ways to filter them, it can be used for a long time to store many tasks.
+### 2. Reusability:
+### 3. Data Persistence: With this application, since it's stored your data in a permanent database, it means that this application can be used over and over again.
+### 4. Response Time: This application isn't super heavy and the amount of calls made to the database are limited ensuring that it's responsive. 
