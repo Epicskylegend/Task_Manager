@@ -8,7 +8,7 @@
 
 ## Running Application:
 
-### To run this application you need to run the file called "DisplayApplication" inside the com.example.task_manager package.
+### To run this application you'll first need to open up the docker application. Afterwards, in the root directory you'll need to enter in the command "docker compose up --build" to spin up the containers for the project. This will spin up the database and create the tables. Give it some time to build and create the tables. Afterwards, run the file called "DisplayApplication" inside the com.example.task_manager package.
 
 ## Testing Functional Requirements
 ## 1. Saving data to database: 
