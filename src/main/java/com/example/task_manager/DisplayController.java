@@ -19,9 +19,7 @@ import java.util.Arrays;
 
 public class  DisplayController {
 
-    public Display display = new Display();
-
-    int counter;
+    private Display display = new Display();
 
     @FXML
     private ComboBox<String> catComboBox;
@@ -87,7 +85,7 @@ public class  DisplayController {
     @FXML
     void handleFilterSelect(ActionEvent event) {
         populateDisplay();
-        System.out.println("Filter selected!");
+//        System.out.println("Filter selected!");
     }
 
     @FXML
