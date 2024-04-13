@@ -90,7 +90,6 @@ public class  DisplayController {
     @FXML
     void handleSearchBar(){
         populateDisplay();
-        setFilter();
         //System.out.println(searchBar.getText());
     }
 
