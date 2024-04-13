@@ -52,4 +52,13 @@ public class Filter {
         }
         return categoriesList;
     }
+
+    public Category getCategory(String name){
+        for (Category c : categoryList){
+            if (name.equalsIgnoreCase(c.getName())){
+                return c;
+            }
+        }
+        return null;
+    }
 }

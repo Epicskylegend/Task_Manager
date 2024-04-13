@@ -3,10 +3,8 @@ package com.example.task_manager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -43,8 +41,6 @@ public class  TaskDisplayController {
 
     @FXML
     public void initialize() {
-//        int removedIndex = mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().indexOf(taskButton);
-//        System.out.println("Initialize: " + mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().remove(removedIndex));
         populateComboBoxes();
         taskDescriptionField.setWrapText(true);
         priorityComboBox.getItems().removeAll(priorityComboBox.getItems());
@@ -52,20 +48,19 @@ public class  TaskDisplayController {
 
         addCatComboBox.setOnAction(event -> {
             String selectedCategory = addCatComboBox.getValue();
+            Category c = display.getFilter().getCategory(selectedCategory);
             if (selectedCategory != null && isExistingCategory(selectedCategory)) {
-                // Disable the color picker for existing categories
-                myColorPicker.setDisable(true);
-            } else {
-                // Enable the color picker for new categories
-                myColorPicker.setDisable(false);
+                myColorPicker.setValue(Color.valueOf(hexToCss(c.getCategoryColor())));
             }
         });
+        addCatComboBox.editableProperty().set(false);
         // set values using info from database instead
         taskNameField.setText(task.getName());
         priorityComboBox.setValue(task.getPriorityLevel());
         addCatComboBox.setValue(task.getCategory().getName());
         taskDescriptionField.setText(task.getDescription());
         completeTask.setSelected(task.getCompletionStatus());
+        myColorPicker.setValue(Color.valueOf(cssToHex(task.getCategory().getCategoryColor())));
     }
     private boolean isExistingCategory(String enteredText) {
         return addCatComboBox.getItems().contains(enteredText);
@@ -82,6 +77,17 @@ public class  TaskDisplayController {
                 break;
             }
         }
+
+        // changes colors of other tasks with same category
+        if (!task.getCategory().getCategoryColor().equalsIgnoreCase(categoryColor)){
+            for (Task t : display.getTaskList()){
+                if (t.getCategory().getName().equalsIgnoreCase(task.getCategory().getName())){
+                    t.getCategory().changeColor(categoryColor);
+                    display.editTask(t);
+                }
+            }
+        }
+
         task.setCompletionStatus(completeTask.isSelected());
         Category taskCategory = new Category(categoryName,categoryColor);
         task.setName(taskNameField.getText());
@@ -94,16 +100,7 @@ public class  TaskDisplayController {
     private void handleSaveButtonAction(ActionEvent event) {
         saveTask(display);
         mainDisplayController.populateDisplay();
-        mainDisplayController.setFilter(); // might remove later
-//        task.setCompletionStatus(true);
-
-        //int removedIndex = mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().indexOf(taskButton);
-//        mainDisplayController.getVBox(priorityComboBox.getValue()).getChildren().add(taskButton);
-//        System.out.println("before");
-//        //mainDisplayController.getVBox(task.getPriorityLevel()).getChildren().remove(removedIndex);
-//        System.out.println("after");
-
-
+        mainDisplayController.setFilter();
 
         // Close the window
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
@@ -130,6 +127,15 @@ public class  TaskDisplayController {
         return colorCode;
     }
 
+    public String cssToHex(String colorCode){
+        if (colorCode.startsWith("#")){
+            colorCode = colorCode.substring(1);
+            String hex = "0x";
+            colorCode = hex + colorCode;
+        }
+        return colorCode;
+    }
+
     public String changeColor(){
         String myColor = myColorPicker.getValue().toString();
         return myColor;
@@ -141,9 +147,5 @@ public class  TaskDisplayController {
             addCatComboBox.getItems().addAll(item);
 
         }
-        System.out.println("In Taskdisplay: " + this);
     }
-
-    // need method to handle completion
-
 }
