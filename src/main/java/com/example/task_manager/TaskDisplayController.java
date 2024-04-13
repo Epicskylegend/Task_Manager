@@ -79,9 +79,18 @@ public class  TaskDisplayController {
         }
 
         // changes colors of other tasks with same category
-        if (!task.getCategory().getCategoryColor().equalsIgnoreCase(categoryColor)){
+        if (!task.getCategory().getCategoryColor().equalsIgnoreCase(categoryColor) && task.getCategory().getName().equalsIgnoreCase(categoryName)){
+            // case where category is the same but color is changed
             for (Task t : display.getTaskList()){
                 if (t.getCategory().getName().equalsIgnoreCase(task.getCategory().getName())){
+                    t.getCategory().changeColor(categoryColor);
+                    display.editTask(t);
+                }
+            }
+        } else if (!task.getCategory().getCategoryColor().equalsIgnoreCase(categoryColor) && !task.getCategory().getName().equalsIgnoreCase(categoryName)){
+            // case where category is changed and color is changed
+            for (Task t : display.getTaskList()){
+                if (t.getCategory().getName().equalsIgnoreCase(categoryName)){
                     t.getCategory().changeColor(categoryColor);
                     display.editTask(t);
                 }

@@ -85,7 +85,6 @@ public class  DisplayController {
     @FXML
     void handleFilterSelect(ActionEvent event) {
         populateDisplay();
-//        System.out.println("Filter selected!");
     }
 
     @FXML
@@ -125,8 +124,6 @@ public class  DisplayController {
     }
 
     public void populateDisplay(){
-//        System.out.println("I'm Filtering. Counter = " + counter);
-//        counter++;
 
         vBox1.getChildren().clear();
         vBox2.getChildren().clear();
