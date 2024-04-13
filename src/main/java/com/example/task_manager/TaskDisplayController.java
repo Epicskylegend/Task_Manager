@@ -65,6 +65,7 @@ public class  TaskDisplayController {
         priorityComboBox.setValue(task.getPriorityLevel());
         addCatComboBox.setValue(task.getCategory().getName());
         taskDescriptionField.setText(task.getDescription());
+        completeTask.setSelected(task.getCompletionStatus());
     }
     private boolean isExistingCategory(String enteredText) {
         return addCatComboBox.getItems().contains(enteredText);
