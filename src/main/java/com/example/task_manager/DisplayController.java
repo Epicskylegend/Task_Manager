@@ -28,17 +28,6 @@ public class  DisplayController {
     private TextField searchBar;
 
     @FXML
-    private Button newTask;
-    @FXML
-    private TitledPane priorityLevel1;
-
-    @FXML
-    private TitledPane priorityLevel2;
-
-    @FXML
-    private TitledPane priorityLevel3;
-
-    @FXML
     VBox vBox1;
 
     @FXML
@@ -70,7 +59,6 @@ public class  DisplayController {
             ((javafx.scene.control.Button) okButton).setText("Save Task");
             okButton.addEventFilter(ActionEvent.ACTION, e -> {
                 // Call the saveTask method from AddTaskController
-                //System.out.println(this);
                 addTaskController.saveTask(display, this);
             });
             dialog.showAndWait();
@@ -90,7 +78,6 @@ public class  DisplayController {
     @FXML
     void handleSearchBar(){
         populateDisplay();
-        //System.out.println(searchBar.getText());
     }
 
     public VBox getVBox(int priority){
