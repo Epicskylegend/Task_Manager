@@ -9,12 +9,13 @@ public class Task {
     private Priority priority;
     private Category category;
     private String description;
-    private Boolean completionStatus;
+    private boolean completionStatus;
 
-    public Task(String name, String description, String categoryName, String categoryColor, int priority) {
+    public Task(String name, String description, String categoryName, String categoryColor, int priority, boolean completionStatus) {
         this.name = name;
         this.description = description;
         this.category = new Category(categoryName, categoryColor);
+        this.completionStatus = completionStatus;
         switch (priority){
             case 1:
                 this.priority = new Priority(priority, "Red");
@@ -25,7 +26,6 @@ public class Task {
             case 3:
                 this.priority = new Priority(priority, "Blue");
         }
-        completionStatus = false;
     }
     public void setID(int id) {
         this.id = id;
@@ -84,11 +84,11 @@ public class Task {
         return priority.getPriorityColor();
     }
 
-    public void setCompletionStatus(Boolean completionStatus){
+    public void setCompletionStatus(boolean completionStatus){
         this.completionStatus = completionStatus;
     }
 
-    public Boolean getCompletionStatus(){
+    public boolean getCompletionStatus(){
         return this.completionStatus;
     }
 }
