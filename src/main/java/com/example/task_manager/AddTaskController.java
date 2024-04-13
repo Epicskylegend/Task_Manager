@@ -1,6 +1,7 @@
 package com.example.task_manager;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,7 +35,7 @@ public class  AddTaskController {
     @FXML
     private ComboBox<Integer> priorityComboBox;
 
-    public void saveTask(Display display, DisplayController mainDisplayController){
+    public void saveTask(Display display, DisplayController mainDisplayController, ActionEvent event){
         String taskName = taskNameField.getText();
         String taskDescription = taskDescriptionField.getText();
 
@@ -58,16 +59,16 @@ public class  AddTaskController {
         Task newTask = new Task(taskName, taskDescription, categoryName, categoryColor, priorityLevel);
 
         try {
-            display.addTask(newTask);
+            if ((categoryName.equalsIgnoreCase("")) || (taskName.equalsIgnoreCase(""))){
+                event.consume();
+            } else {
+                display.addTask(newTask);
 
-            //create task button for main display
-            TaskButton button = new TaskButton(newTask,display, mainDisplayController);
-            int priority = button.getTask().getPriorityLevel();
-            //assign task to correct vbox
-//            VBox vbox = mainDisplayController.getVBox(priority);
-//            vbox.getChildren().add(button);
-            mainDisplayController.populateDisplay();
-            mainDisplayController.setFilter();
+                //create task button for main display and refresh display
+                TaskButton button = new TaskButton(newTask,display, mainDisplayController);
+                mainDisplayController.populateDisplay();
+                mainDisplayController.setFilter();
+            }
 
         } catch(Exception e) {
             System.out.println(e.getMessage());
@@ -98,6 +99,25 @@ public class  AddTaskController {
     public void initialize(){
         priorityComboBox.getItems().removeAll(priorityComboBox.getItems());
         priorityComboBox.getItems().addAll(1,2,3 );
+
+        addCatComboBox.setOnAction(event -> {
+            if (isExistingCategory(addCatComboBox.getValue())){
+                String color = hexToCss("White");
+                ArrayList<Category> categories = filter.getFilter();
+                String catName = addCatComboBox.getValue();
+                for (Category c : categories){
+                    if (c.getName().equalsIgnoreCase(catName)){
+                        color = hexToCss(c.getCategoryColor());
+                        myColorPicker.setDisable(true);
+                    }
+                }
+                myColorPicker.setValue(Color.valueOf(hexToCss(hexToCss(color))));
+            }
+        });
+    }
+
+    private boolean isExistingCategory(String enteredText) {
+        return addCatComboBox.getItems().contains(enteredText);
     }
 
 }

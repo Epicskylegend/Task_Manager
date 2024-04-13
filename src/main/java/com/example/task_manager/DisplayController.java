@@ -59,7 +59,7 @@ public class  DisplayController {
             ((javafx.scene.control.Button) okButton).setText("Save Task");
             okButton.addEventFilter(ActionEvent.ACTION, e -> {
                 // Call the saveTask method from AddTaskController
-                addTaskController.saveTask(display, this);
+                addTaskController.saveTask(display, this, e);
             });
             dialog.showAndWait();
 
