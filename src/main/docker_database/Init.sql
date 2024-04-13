@@ -17,15 +17,6 @@ CREATE TABLE IF NOT EXISTS Categories (
 );
 
 
---DO $$
---BEGIN
---
---    IF (SELECT count(*) FROM information_schema.columns WHERE table_name = 'tasks') < 7 THEN
---
---        ALTER TABLE Tasks ADD COLUMN task_completion BOOLEAN;
---        RAISE NOTICE 'task_completion column succesfully added.';
---    END IF;
---END $$;
 
 
 
