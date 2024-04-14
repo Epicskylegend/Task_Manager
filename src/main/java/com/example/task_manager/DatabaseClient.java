@@ -105,8 +105,9 @@ public class DatabaseClient {
                 String categoryName = resultSet.getString("category_name");
                 String categoryColor = resultSet.getString("category_color");
                 int priorityLevel = resultSet.getInt("priority_level");
+                boolean completionStatus = resultSet.getBoolean("task_completion");
 
-                Task task = new Task(name, description, categoryName, categoryColor, priorityLevel);
+                Task task = new Task(name, description, categoryName, categoryColor, priorityLevel, completionStatus);
                 task.setID(id);
                 tasks.add(task);
             }

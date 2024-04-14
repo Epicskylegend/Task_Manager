@@ -56,7 +56,7 @@ public class  AddTaskController {
 
         int priorityLevel = priorityComboBox.getValue();
 
-        Task newTask = new Task(taskName, taskDescription, categoryName, categoryColor, priorityLevel);
+        Task newTask = new Task(taskName, taskDescription, categoryName, categoryColor, priorityLevel, false);
 
         try {
             if ((categoryName.equalsIgnoreCase("")) || (taskName.equalsIgnoreCase(""))){
