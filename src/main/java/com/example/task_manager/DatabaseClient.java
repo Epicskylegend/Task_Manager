@@ -26,12 +26,35 @@ public class DatabaseClient {
         st.executeUpdate();
 
         ResultSet generatedKeys = st.getGeneratedKeys();
-        if (generatedKeys.next()) {
-            int generatedId = generatedKeys.getInt(1);
-            task.setID(generatedId);
+
+        //for getting task id
+        String query = "SELECT id FROM Tasks WHERE task_name = ? AND task_description = ? AND category_name = ? AND category_color = ? AND priority_level = ? AND task_completion = ?";
+        PreparedStatement selectStatement = connection.prepareStatement(query);
+        selectStatement.setString(1, task.getName());
+        selectStatement.setString(2, task.getDescription());
+        selectStatement.setString(3, task.getCategory().getName());
+        selectStatement.setString(4, task.getCategory().getCategoryColor());
+        selectStatement.setInt(5, task.getPriorityLevel());
+        selectStatement.setBoolean(6, task.getCompletionStatus());
+
+        int taskID = -1;
+
+        ResultSet resultSet = null;
+
+        resultSet = selectStatement.executeQuery();
+
+        if (resultSet.next()){
+            taskID = resultSet.getInt("id");
         } else {
-            throw new SQLException("Failed to get generated task ID.");
+            throw new SQLException("Failed to retrieve task ID after insertion.");
         }
+
+        task.setID(taskID);
+
+        if (resultSet != null){
+            resultSet.close();
+        }
+
         connection.commit();
 
         generatedKeys.close();
@@ -75,13 +98,15 @@ public class DatabaseClient {
 
         st.executeUpdate();
         st.close();
+        connection.commit(); //doesn't work
         connection.close();
-        st.setString(1, task.getDescription());
+//        st.setString(1, task.getDescription());
 
     }
 
     private Connection connect() throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        connection.setAutoCommit(false);
         return connection;
     }
 
@@ -131,7 +156,7 @@ public class DatabaseClient {
             while (resultSet.next()) {
                 String categoryName = resultSet.getString("category_name");
                 String categoryColor = resultSet.getString("category_color");
-                categoriesList.add(new Categories(categoryName) {
+                categoriesList.add(new Category(categoryName, categoryColor) {
                 });
             }
 

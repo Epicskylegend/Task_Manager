@@ -58,7 +58,7 @@ public class Display {
             taskList.add(task);
             addCategory(task.getCategory());
         } catch (DuplicateCategoryException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         try {
