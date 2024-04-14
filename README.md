@@ -8,7 +8,7 @@
 
 ## Running Application:
 
-### To run this application you'll first need to open up the docker application. Afterwards, in the root directory you'll need to enter in the command "docker compose up --build" to spin up the containers for the project. This will spin up the database and create the tables. Give it some time to build and create the tables. Afterwards, run the file called "DisplayApplication" inside the com.example.task_manager package.
+### To run this application you'll first need to open up the docker application. Afterwards, in the root directory you'll need to enter in the command "docker compose down" in case you have an older version of our application. Then you can enter in "docker compose up --build" to spin up the containers for the project. This will spin up the database and create the tables. Give it some time to build and create the tables. Afterwards, run the file called "DisplayApplication" inside the com.example.task_manager package.
 
 ## Testing Functional Requirements
 ## 1. Saving data to database: 
@@ -29,7 +29,7 @@ Each of the tasks in the application will be put into one of the 3 priority leve
 
 ## 5. Allowing user to sort task by category: 
 
-When click on the "Filter by Category" section on the left side of the application you will see a list of categories which you can click on to see tasks within those categories as long as you have clicked on priority level the task is in.  
+When clicking on the "Filter by Category" section on the left side of the application you will see a list of categories which you can click on to see tasks within those categories as long as you have clicked on the priority level the task is in.  
 
 ## 6. Allow user to categorize tasks as complete: 
 
