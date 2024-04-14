@@ -3,22 +3,16 @@ package com.example.task_manager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.input.PickResult;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class  AddTaskController {
 
     Filter filter;
-
-    @FXML
-    private Label titleLabel;
 
     @FXML
     private TextField taskNameField;
@@ -42,8 +36,6 @@ public class  AddTaskController {
         String categoryName = addCatComboBox.getValue();
         String categoryColor = hexToCss(changeColor());
 
-        Boolean dupe = false;
-
         for (Category c : filter.getFilter()){
             String catName = c.getName();
             if (catName.equalsIgnoreCase(categoryName)){
@@ -54,18 +46,13 @@ public class  AddTaskController {
             }
         }
 
-        int priorityLevel = priorityComboBox.getValue();
-
-        Task newTask = new Task(taskName, taskDescription, categoryName, categoryColor, priorityLevel, false);
-
         try {
-            if ((categoryName.equalsIgnoreCase("")) || (taskName.equalsIgnoreCase(""))){
+            if ((categoryName == null) || (priorityComboBox.getValue() == null) || (categoryName.equalsIgnoreCase("")) || (taskName.equalsIgnoreCase(""))){
                 event.consume();
             } else {
+                int priorityLevel = priorityComboBox.getValue();
+                Task newTask = new Task(taskName, taskDescription, categoryName, categoryColor, priorityLevel, false);
                 display.addTask(newTask);
-
-                //create task button for main display and refresh display
-                TaskButton button = new TaskButton(newTask,display, mainDisplayController);
                 mainDisplayController.populateDisplay();
                 mainDisplayController.setFilter();
             }
