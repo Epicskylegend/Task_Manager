@@ -98,9 +98,8 @@ public class DatabaseClient {
 
         st.executeUpdate();
         st.close();
-        connection.commit(); //doesn't work
+        connection.commit();
         connection.close();
-//        st.setString(1, task.getDescription());
 
     }
 
