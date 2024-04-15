@@ -96,7 +96,6 @@ public class  DisplayController {
     public void initialize() {
         //adds event listener to search bar to call event when text bar is updated for each change of letter
         searchBar.textProperty().addListener(((observable, oldValue, newValue) -> {
-            display.setSearchBarText(newValue);
             this.searchBar.setText(newValue);
             handleSearchBar();
         }));
