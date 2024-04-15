@@ -65,12 +65,24 @@ public class Display {
                     e.printStackTrace();
                 }
                 Category c = t.getCategory();
-                for (Category filterCat : filter.getFilter()){
-                    if (filterCat.getName().equalsIgnoreCase(c.getName())){
-                        filter.removeFilter(c);
-                        break;
+
+                boolean moreTasksWithCategory = false;
+
+                for (Task otherTask : taskList){
+                    if (otherTask.getCategory().getName().equalsIgnoreCase(c.getName())){
+                        moreTasksWithCategory = true;
                     }
                 }
+
+                if (!moreTasksWithCategory){
+                    for (Category filterCat : filter.getFilter()){
+                        if (filterCat.getName().equalsIgnoreCase(c.getName())){
+                            filter.removeFilter(c);
+                            break;
+                        }
+                    }
+                }
+
                 return true;
             }
         }
