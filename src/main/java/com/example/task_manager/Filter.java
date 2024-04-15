@@ -36,13 +36,6 @@ public class Filter {
         return categoryList;
     }
 
-    public void updateCategoryList(ArrayList<Category> newList){
-        this.categoryList = new ArrayList<>();
-        for (Category c : newList){
-            this.categoryList.add(c);
-        }
-    }
-
     public ArrayList<String> getCategoryList() {
         ArrayList<String> categoriesList = new ArrayList<>();
         for (Category c : this.categoryList){
