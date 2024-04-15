@@ -58,10 +58,6 @@ public class Task {
     public Category getCategory(){
         return this.category;
     }
-    
-    public void assignPriority(Priority priority){
-        this.priority = priority;
-    }
 
     public int getPriorityLevel() {
         return priority.getPriorityLevel();
