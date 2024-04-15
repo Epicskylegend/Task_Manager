@@ -20,11 +20,4 @@ public class Priority implements PriorityInterface{
     public String getPriorityColor() {
         return this.priorityColor;
     }
-
-    public void changePriorityLevel(int level) {
-        this.priorityLevel = level;
-    }
-    public void changePriorityColor(String color){
-        this.priorityColor = color;
-    }
 }
