@@ -15,9 +15,7 @@ public class  TaskDisplayController {
     private Filter filter;
     DisplayController mainDisplayController;
     TaskButton taskButton;
-    public TaskDisplayController(){
 
-    }
     public TaskDisplayController(Task task, Display display, DisplayController mainDisplayController, TaskButton taskButton){
         this.task = task;
         this.display = display;
