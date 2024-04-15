@@ -45,7 +45,6 @@ public class TaskButton extends Button {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Task_Display.fxml"));
 
-                System.out.println(display.getCategories());
                 TaskDisplayController controller = new TaskDisplayController(task, display, mainDisplayController, this);
                 fxmlLoader.setController(controller);
                 BorderPane root1 = fxmlLoader.load();
