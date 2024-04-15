@@ -20,7 +20,7 @@ public class TaskButton extends Button {
     public TaskButton(Task t, Display display, DisplayController mainDisplayController){
         super("");
 
-        super.setPrefWidth(Double.MAX_VALUE); // may need to change this later, unsure, but it does fill to fit currently
+        super.setPrefWidth(Double.MAX_VALUE);
         this.task = t;
         this.display = display;
         this.mainDisplayController = mainDisplayController;
@@ -45,10 +45,8 @@ public class TaskButton extends Button {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Task_Display.fxml"));
 
-                System.out.println("I am here");
                 System.out.println(display.getCategories());
                 TaskDisplayController controller = new TaskDisplayController(task, display, mainDisplayController, this);
-                System.out.println("in taskbutton: " + controller);
                 fxmlLoader.setController(controller);
                 BorderPane root1 = fxmlLoader.load();
 
