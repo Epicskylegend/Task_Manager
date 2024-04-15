@@ -19,7 +19,6 @@ public class Display {
         try {
             updateTaskList(dbClient.getAllTasks());
         } catch (SQLException e) {
-            // Handle SQLException
             e.printStackTrace();
         }
 
@@ -38,18 +37,6 @@ public class Display {
                 catList.add(t.getCategory());
             }
         }
-    }
-
-
-
-    //updates view of display
-    public void updateView(){
-        //
-    }
-
-    //displays error message on display
-    public void displayError(){
-        //
     }
 
     //adds task to taskList if it does not already exist and returns true or false if there already exists task in taskList
@@ -121,10 +108,6 @@ public class Display {
 
 
         filter.addFilter(category);
-    }
-
-    public String getSearchBarText() {
-        return search.getText();
     }
 
     public void setSearchBarText(String text) {
